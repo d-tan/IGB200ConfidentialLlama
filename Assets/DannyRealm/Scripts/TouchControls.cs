@@ -41,11 +41,11 @@ public class TouchControls : MonoBehaviour {
 					break;
 
 				case TouchPhase.Ended:
-					FinishTouch (Touch);
+					FinishTouch (touch);
 					break;
 
 				case TouchPhase.Canceled:
-					FinishTouch (Touch);
+					FinishTouch (touch);
 					break;
 				}
 			}
