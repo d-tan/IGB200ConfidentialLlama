@@ -1,0 +1,73 @@
+TUTORIAL LEVEL:
+
+---INTRODUCTION---
+"Welcome young chef to 'Flick Dish Pizzaria', the most lively pizzaria in the world."
+"Here you'll learn how to prepare pizzas for hungry customers with a friend." 
+	- Responses = "Cool."
+"Except, to make this pizzaria lively and interesting, the chefs have to throw food to each other from accross the building."
+	- Responses = "Excuse me?"
+"Oh but don't worry, I'll walk you through it."
+	- Responses = "Ok."
+
+
+---PHASE 01: Ingredients and Recipes---
+"Ok, so the first step is to make food. Ah, here comes an order!"
+	- Pre-defined order arrives = Cheese Pizza.
+"Ok, so one of you drag the order to your side of the parlour to accept it. Pressing on the order once you have it lets you see what you need for it."
+	- Dragging the order to the workstation sends the icon to the order viewing area, pressing on the icon shows an ingredient list.
+	- Pressing on the order once at the workstation continues the tutorial"
+"This order is for a cheese pizza, simple. It needs a pizza base and cheese."
+	- Responses = "Ok."
+"It doesn't matter what order you make the pizza in, we'll get the idea. So drag the pizza base onto this plate."
+	- Highlights a plate near the player that has access to the pizza base.
+	- Dragging the pizza base to the plate progesses the tutorial.
+"Good, but unfortunately, you can't do this alone. Or you could if you have two hands but we all know it's better with friends."
+	- Responses = "Right..."
+"This brings us to the next step. You there, your turn to contribute."
+	- Responses = "Me?" (PLAYER 02), (PLAYER 01 DOES NOT GET A RESPONSE).
+
+
+---PHASE 02: Flicking and Coordination---
+"Now, you won't always get the ingredients you need, on your side. You'll need to 'flick' the food to your partner."
+	- Responses = "Ok?" (PLAYER 01), (PLAYER 02 DOES NOT GET A RESPONSE).
+"Pick up the plate and throw it to your partner, try and aim for an empty counter top, otherwise it'll be no good."
+	- Flicking the plate to the other player successfully continues the tutorial. Otherwise the plate respawns and a message appears:
+		"For now I'll give you back your food. But if you screw it up later, you'll need to make it again."
+"Very good! Now, click on the fridge to open it, find the cheese and drag it onto the pizza base."
+	- Dragging a slice of cheese onto the pizza base progresses the tutorial.
+"Nice, one pizza. Unforunately we can't just send that off, pizzas need to be cooked, people who eat cold pizzas are just weird."
+	- Responses = "Ok."
+"Drag the pizza onto the highlighted counter."
+	- Dragging the pizza onto the counter continues the tutorial.
+"So, now the pizza goes into the oven and is cooked. If you had other orders you could be doing them right now. But for now, we wait."
+	- Responses = "Right."
+	- Pressing on the response buttons and the pizza has reached the cooker, causes the Oven to finish, continuing the tutorial.
+"It's random what side the pizza comes out on, but that shouldn't be a problem for you."
+	- Responses = "Not at all."
+"Delicious! Now that it's hot, it's ready to serve."
+	- Responses = "Yay!"
+
+
+---PHASE 02: Obstructions---
+"Ok, time to alert you to a norm around here, obstructions. We'll get through these quickly because you're probably sick of listening to me."
+	- Responses = "What!? Not at all..."
+"Right... So these are our pizza boys and girls, they work here. Soon enough they'll pick up the pizza and take it away. But sadly we aren't done yet."
+	- Responses = "We aren't?"
+"Nope. I sabotaged two of your appliances. Your fridge is broken and the oven is on fire. No need to thank me."
+	- Responses = "..."
+"For fires, drag the fire extinguisher onto the appliance to put it out. Don't worry, your food is safe. The appliance will just start again."
+	- Responses = "Gotcha." (PLAYER 01), (PLAYER 02 DOES NOT GET A RESPONSE).
+"For broken appliances, tap on it three times to fix it."
+	- Responses = "On it." (PLAYER 01), (PLAYER 02 DOES NOT GET A RESPONSE).
+"Better get to it!"
+	- Putting out the fire and fixing the appliance, continues the tutorial.
+"Well done, and that's it. I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!"
+	- Responses = "Let's do this!"
+
+
+---PHASE 03: Test---
+- Tutorial progresses by completing two Cheese Pizza orders.
+"Very well done, your progress, not the food. The food is excellent."
+	- Responses = "Thanks!"
+"I think you're ready to go for real. What do you two say? You can say no and we'll do it again."
+	- Responses = "I'm ready!!" (ENDS THE TUTORIAL), "Can we do it again?" (RESTARTS THE TUTORIAL)
