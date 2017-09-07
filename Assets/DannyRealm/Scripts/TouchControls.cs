@@ -13,13 +13,14 @@ public class TouchControls : MonoBehaviour {
 	public GameObject[] t_HeldObjects = new GameObject[numTouches];
 	Vector3[] t_fingerPos = new Vector3[numTouches];
 	bool[] t_stationary = new bool[numTouches];
+	Vector3[] originalScale = new Vector3[numTouches];
 	Vector3 resetPos;
 
 	// Flick
 	Vector3[] t_velocity = new Vector3[numTouches];
 	Vector3[] t_prevPos = new Vector3[numTouches];
-	float minVelSqr = 1.5f;
-	float flickVelMultiplier = 7f;
+	public float minVelSqr = 1f;
+	float flickVelMultiplier = 10f;
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -64,10 +65,12 @@ public class TouchControls : MonoBehaviour {
 					break;
 
 				case TouchPhase.Ended:
+					Debug.Log ("Touch Ended");
 					FinishTouch (currentTouch);
 					break;
 
 				case TouchPhase.Canceled:
+					Debug.Log ("Touch Canceled");
 					FinishTouch (currentTouch);
 					break;
 				}
@@ -84,20 +87,27 @@ public class TouchControls : MonoBehaviour {
 	void InitialiseTouch(Touch touch) {
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out t_Raycasts[touch.fingerId])) {
 
-			if (t_HeldObjects[touch.fingerId] == null && t_Raycasts[touch.fingerId].transform.CompareTag("PickUp")) {
+			if (t_HeldObjects[touch.fingerId] == null && (t_Raycasts[touch.fingerId].transform.CompareTag("PickUp") || t_Raycasts[touch.fingerId].transform.CompareTag("Ingredient"))) {
 
 				if (!CheckAlreadyHolding (t_Raycasts [touch.fingerId].transform.gameObject)) {
+
+					Throwable script = t_Raycasts [touch.fingerId].transform.GetComponent<Throwable> ();
+
 					// Store gameObject
-					t_HeldObjects [touch.fingerId] = t_Raycasts [touch.fingerId].transform.gameObject;
+					t_HeldObjects [touch.fingerId] = script.gameObject;
 
 					// Zero the velocity
-					t_HeldObjects [touch.fingerId].GetComponent<Rigidbody> ().velocity = Vector3.zero;
+					script.rb.velocity = new Vector3(0, 0, 0);
+
+					// Set Variable
+					script.beingHeld = true;
 
 					// Change the local scale
-					t_HeldObjects [touch.fingerId].transform.localScale *= 2;
+					originalScale [touch.fingerId] = script.transform.localScale;
+					script.transform.localScale *= 2;
 
 					// Store the position for calculating velocity
-					t_prevPos [touch.fingerId] = t_HeldObjects [touch.fingerId].transform.position;
+					t_prevPos [touch.fingerId] = script.transform.position;
 				}
 			}
 		}
@@ -139,18 +149,29 @@ public class TouchControls : MonoBehaviour {
 	/// <param name="touch">Touch.</param>
 	void FinishTouch(Touch touch) {
 		if (t_HeldObjects[touch.fingerId] != null) {
-			t_HeldObjects [touch.fingerId].transform.localScale = Vector3.one;
 
+			Throwable obj = t_HeldObjects [touch.fingerId].GetComponent<Throwable> ();
+
+			// Reset Scale
+			obj.transform.localScale = originalScale[touch.fingerId];
+
+			// Check if action was a flick
 			if (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) {
-				t_HeldObjects [touch.fingerId].GetComponent<Rigidbody> ().velocity = t_velocity [touch.fingerId] * flickVelMultiplier;
+				Vector3 vel = t_velocity [touch.fingerId];
+//				* Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f)?
+				obj.rb.velocity = vel * Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * (flickVelMultiplier / vel.sqrMagnitude);
 			}
 
 			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);
 
-
+			// Reset stationary bool
 			if (!t_stationary [touch.fingerId])
 				t_stationary [touch.fingerId] = true;
 
+			// Reset bool
+			obj.beingHeld = false;
+
+			// Remove from list
 			t_HeldObjects [touch.fingerId] = null;
 		}
 	}
@@ -182,7 +203,7 @@ public class TouchControls : MonoBehaviour {
 
 				Debug.DrawLine (Camera.main.ScreenPointToRay (Input.mousePosition).origin, Camera.main.ScreenPointToRay (Input.mousePosition).direction * 10);
 
-				if (m_HeldObject == null && m_RayCast.transform.CompareTag ("PickUp")) {
+				if (m_HeldObject == null && (m_RayCast.transform.CompareTag ("PickUp") || m_RayCast.transform.CompareTag ("Ingredient"))) {
 
 					m_HeldObject = m_RayCast.transform.gameObject;
 				}
