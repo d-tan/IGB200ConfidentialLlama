@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUp
   - Ingredient
+  - Pile
   layers:
   - Default
   - TransparentFX

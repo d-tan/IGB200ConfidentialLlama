@@ -18,7 +18,7 @@ public class PlateTrigger : MonoBehaviour {
 				if (!parent.CheckIfFull ()) {
 					Ingredient ingredient = other.GetComponent<Ingredient> ();
 
-					if (ingredient.beingHeld == false) {
+					if (!parent.throwScript.beingHeld && ingredient.beingHeld == false) {
 						parent.IngredientTrigger (ingredient);
 					} else {
 						Debug.Log ("Still being held");
@@ -36,7 +36,7 @@ public class PlateTrigger : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 
-		if(colliding.ContainsKey(other) && !colliding[other].beingHeld) {
+		if(!parent.throwScript.beingHeld && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
 			Debug.Log ("Colliding and not being held");
 			parent.IngredientTrigger (colliding[other]);
 			colliding.Remove (other);

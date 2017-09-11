@@ -5,6 +5,7 @@ using UnityEngine;
 public class Plate : MonoBehaviour {
 
 	Collider myCollider;
+	public Throwable throwScript;
 	float colliderHeight = 0f;
 
 	const int numOfIngredients = 4;
@@ -14,6 +15,7 @@ public class Plate : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myCollider = GetComponent<Collider> ();
+		throwScript = GetComponent<Throwable> ();
 
 		colliderHeight = myCollider.bounds.extents.y;
 
@@ -48,10 +50,14 @@ public class Plate : MonoBehaviour {
 
 				script.transform.parent = this.transform;
 
-				script.transform.position = positions [i].position;
-				script.transform.localScale *= 0.4f;
+				script.transform.localPosition = new Vector3(0, 0.1f, 0);
 
-				script.transform.position += new Vector3 (0f, 2 * myCollider.bounds.extents.y + 2 * script.myCollider.bounds.extents.y, 0f);
+				script.transform.localPosition += new Vector3(0, 0.1f * i, 0);
+
+				if (i > 0)
+//					script.transform.position += ingredients [i].transform.position;
+
+//				script.transform.position += new Vector3 (0f, 2 * myCollider.bounds.extents.y + 2 * script.myCollider.bounds.extents.y, 0f);
 
 				break;
 			}

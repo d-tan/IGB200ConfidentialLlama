@@ -8,6 +8,7 @@ public class TouchControls : MonoBehaviour {
 
 	// Touch
 	const int numTouches = 4;
+	const float camDist = 21;
 	Touch currentTouch;
 	RaycastHit[] t_Raycasts = new RaycastHit[numTouches];
 	public GameObject[] t_HeldObjects = new GameObject[numTouches];
@@ -20,7 +21,7 @@ public class TouchControls : MonoBehaviour {
 	Vector3[] t_velocity = new Vector3[numTouches];
 	Vector3[] t_prevPos = new Vector3[numTouches];
 	public float minVelSqr = 1f;
-	float flickVelMultiplier = 10f;
+	float flickVelMultiplier = 14f;
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -65,12 +66,10 @@ public class TouchControls : MonoBehaviour {
 					break;
 
 				case TouchPhase.Ended:
-					Debug.Log ("Touch Ended");
 					FinishTouch (currentTouch);
 					break;
 
 				case TouchPhase.Canceled:
-					Debug.Log ("Touch Canceled");
 					FinishTouch (currentTouch);
 					break;
 				}
@@ -87,11 +86,17 @@ public class TouchControls : MonoBehaviour {
 	void InitialiseTouch(Touch touch) {
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out t_Raycasts[touch.fingerId])) {
 
-			if (t_HeldObjects[touch.fingerId] == null && (t_Raycasts[touch.fingerId].transform.CompareTag("PickUp") || t_Raycasts[touch.fingerId].transform.CompareTag("Ingredient"))) {
+			Transform raycasted = t_Raycasts [touch.fingerId].transform;
+			if (t_HeldObjects[touch.fingerId] == null && (raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile"))) {
 
-				if (!CheckAlreadyHolding (t_Raycasts [touch.fingerId].transform.gameObject)) {
+				// if you tapped a pile
+				if (raycasted.CompareTag("Pile")) {
+					raycasted.GetComponent<PileOf> ().GiveItem(Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, camDist)));
+				}
 
-					Throwable script = t_Raycasts [touch.fingerId].transform.GetComponent<Throwable> ();
+				if (!CheckAlreadyHolding (raycasted.gameObject)) {
+
+					Throwable script = raycasted.GetComponent<Throwable> ();
 
 					// Store gameObject
 					t_HeldObjects [touch.fingerId] = script.gameObject;
@@ -119,8 +124,10 @@ public class TouchControls : MonoBehaviour {
 	/// <param name="touch">Touch.</param>
 	void DragTouch(Touch touch) {
 		if (t_HeldObjects[touch.fingerId] != null) {
-			t_fingerPos [touch.fingerId] = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, 10));
+			t_fingerPos [touch.fingerId] = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, camDist));
 			t_fingerPos [touch.fingerId].y = 0;
+
+
 
 			t_HeldObjects [touch.fingerId].transform.position = t_fingerPos [touch.fingerId];
 
@@ -159,7 +166,7 @@ public class TouchControls : MonoBehaviour {
 			if (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) {
 				Vector3 vel = t_velocity [touch.fingerId];
 //				* Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f)?
-				obj.rb.velocity = vel * Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * (flickVelMultiplier / vel.sqrMagnitude);
+				obj.rb.velocity = vel * Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * Mathf.Clamp(flickVelMultiplier / vel.sqrMagnitude, 5, flickVelMultiplier * 1.5f);
 			}
 
 			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);
@@ -193,7 +200,7 @@ public class TouchControls : MonoBehaviour {
 
 		if (Input.GetMouseButton(0)) {
 
-			m_mousePos = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+			m_mousePos = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y, camDist));
 			m_mousePos.y = 0f;
 
 			if (m_HeldObject)
@@ -201,7 +208,7 @@ public class TouchControls : MonoBehaviour {
 			
 			if(Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out m_RayCast)) {
 
-				Debug.DrawLine (Camera.main.ScreenPointToRay (Input.mousePosition).origin, Camera.main.ScreenPointToRay (Input.mousePosition).direction * 10);
+				Debug.DrawLine (Camera.main.ScreenPointToRay (Input.mousePosition).origin, Camera.main.ScreenPointToRay (Input.mousePosition).direction * 21);
 
 				if (m_HeldObject == null && (m_RayCast.transform.CompareTag ("PickUp") || m_RayCast.transform.CompareTag ("Ingredient"))) {
 
