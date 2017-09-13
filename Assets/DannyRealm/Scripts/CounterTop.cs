@@ -19,8 +19,10 @@ public class CounterTop : MonoBehaviour {
 	public void HoldObject(Collider col) {
 		currentlyHolding = col;
 		col.attachedRigidbody.velocity = new Vector3 (0, 0, 0);
+		col.attachedRigidbody.isKinematic = true;
 
-		col.transform.position = this.transform.position + new Vector3 (0, 0.01f, 0);
+		col.transform.parent = this.transform;
+		col.transform.localPosition = new Vector3 (0, 0.01f, 0);
 
 	}
 

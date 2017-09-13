@@ -20,8 +20,9 @@ public class TouchControls : MonoBehaviour {
 	// Flick
 	Vector3[] t_velocity = new Vector3[numTouches];
 	Vector3[] t_prevPos = new Vector3[numTouches];
-	public float minVelSqr = 1f;
-	float flickVelMultiplier = 14f;
+	public float minVel = 1;
+	public Vector2 flickVelBounds = new Vector2 ();
+	float flickVelMultiplier = 7f;
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -97,12 +98,14 @@ public class TouchControls : MonoBehaviour {
 				if (!CheckAlreadyHolding (raycasted.gameObject)) {
 
 					Throwable script = raycasted.GetComponent<Throwable> ();
+					script.transform.parent = null;
 
 					// Store gameObject
 					t_HeldObjects [touch.fingerId] = script.gameObject;
 
 					// Zero the velocity
 					script.rb.velocity = new Vector3(0, 0, 0);
+					script.rb.isKinematic = false;
 
 					// Set Variable
 					script.beingHeld = true;
@@ -162,14 +165,29 @@ public class TouchControls : MonoBehaviour {
 			// Reset Scale
 			obj.transform.localScale = originalScale[touch.fingerId];
 
+			float magnitude = t_velocity [touch.fingerId].magnitude;
+
 			// Check if action was a flick
-			if (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) {
+			if (magnitude > minVel) {
 				Vector3 vel = t_velocity [touch.fingerId];
 //				* Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f)?
-				obj.rb.velocity = vel * Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * Mathf.Clamp(flickVelMultiplier / vel.sqrMagnitude, 5, flickVelMultiplier * 1.5f);
+				// Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * Mathf.Clamp(flickVelMultiplier / vel.sqrMagnitude, 5, flickVelMultiplier * 1.5f)
+
+				if (magnitude < flickVelBounds.x) {
+					obj.rb.velocity = vel / magnitude * flickVelBounds.x * flickVelMultiplier;
+
+				} else if (magnitude > flickVelBounds.y) {
+					obj.rb.velocity = vel / magnitude * flickVelBounds.y * flickVelMultiplier;
+
+				} else {
+					Debug.Log ("In Bounds");
+					obj.rb.velocity = vel * flickVelMultiplier;
+				}
+
+
 			}
 
-			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (t_velocity[touch.fingerId].sqrMagnitude > minVelSqr) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);
+			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (magnitude > minVel) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);
 
 			// Reset stationary bool
 			if (!t_stationary [touch.fingerId])

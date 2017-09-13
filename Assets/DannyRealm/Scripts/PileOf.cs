@@ -8,6 +8,7 @@ public class PileOf : MonoBehaviour {
 	public bool canSpawn = true;
 	string tagToWatch = "Ingredient";
 
+	Throwable currentObject;
 
 	void Update() {
 		if (canSpawn) {
@@ -18,19 +19,24 @@ public class PileOf : MonoBehaviour {
 
 	public void GiveItem(Vector3 coords) {
 		Instantiate (item, coords, Quaternion.identity);
+
 	}
 
 	void SpawnItem() {
-		Instantiate (item, transform.position, Quaternion.identity);
+		GameObject spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
+		currentObject = spawnedObject.GetComponent<Throwable> ();
+		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
 	}
 
 	void OnTriggerStay(Collider other) {
-		if (other.CompareTag(tagToWatch)) {
+		if (other.CompareTag(tagToWatch) || other.CompareTag("PickUp")) {
 			canSpawn = false;
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
-		
+		if (currentObject.myCollider.Equals(other)) {
+			canSpawn = true;
+		}
 	}
 }
