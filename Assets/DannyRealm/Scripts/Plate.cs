@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum IngredientID {
+	Cheese,
+	PizzaBase
+}
+
 public class Plate : MonoBehaviour {
 
 	Collider myCollider;
@@ -23,14 +28,13 @@ public class Plate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.P)) {
-			ingredients [0].transform.localScale = lastScale;
-		}
+		
 	}
 
-	Vector3 lastScale = new Vector3();
-
 	public void IngredientTrigger(Ingredient script) {
+
+		if (CheckContainsIngredient (script.ingredientID))
+			return;
 
 		for (int i = 0; i < ingredients.Length; i++) {
 			if (ingredients[i] == null) {
@@ -72,5 +76,16 @@ public class Plate : MonoBehaviour {
 		}
 
 		return true;
+	}
+
+	public bool CheckContainsIngredient(IngredientID id) {
+		for (int i = 0; i < ingredients.Length; i++) {
+			if (ingredients[i]) {
+				if (ingredients [i].ingredientID == id)
+					return true;
+			}
+		}
+
+		return false;
 	}
 }
