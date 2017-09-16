@@ -88,7 +88,8 @@ public class TouchControls : MonoBehaviour {
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out t_Raycasts[touch.fingerId])) {
 
 			Transform raycasted = t_Raycasts [touch.fingerId].transform;
-			if (t_HeldObjects[touch.fingerId] == null && (raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile"))) {
+			if (t_HeldObjects[touch.fingerId] == null && 
+				(raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile") || raycasted.CompareTag("Order"))) {
 
 				// if you tapped a pile
 				if (raycasted.CompareTag("Pile")) {
@@ -228,7 +229,7 @@ public class TouchControls : MonoBehaviour {
 
 				Debug.DrawLine (Camera.main.ScreenPointToRay (Input.mousePosition).origin, Camera.main.ScreenPointToRay (Input.mousePosition).direction * 21);
 
-				if (m_HeldObject == null && (m_RayCast.transform.CompareTag ("PickUp") || m_RayCast.transform.CompareTag ("Ingredient"))) {
+				if (m_HeldObject == null && (m_RayCast.transform.CompareTag ("PickUp") || m_RayCast.transform.CompareTag ("Ingredient") || m_RayCast.transform.CompareTag ("Order"))) {
 
 					m_HeldObject = m_RayCast.transform.gameObject;
 				}

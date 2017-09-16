@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum IngredientID {
+	None,
 	Cheese,
 	PizzaBase
 }
@@ -23,6 +24,7 @@ public class Plate : MonoBehaviour {
 		throwScript = GetComponent<Throwable> ();
 
 		colliderHeight = myCollider.bounds.extents.y;
+
 
 	}
 	

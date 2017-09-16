@@ -20,7 +20,7 @@ public class OvenInputCollider : MonoBehaviour {
 		Plate script = other.GetComponent<Plate> ();
 
 		if (script) {
-			parent.InputColldier (script);
+			parent.InputCollider (script);
 		}
 	}
 }

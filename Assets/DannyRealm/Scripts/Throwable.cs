@@ -15,9 +15,4 @@ public class Throwable : MonoBehaviour {
 		myCollider = GetComponent<Collider> ();
 		rb = GetComponent<Rigidbody> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
