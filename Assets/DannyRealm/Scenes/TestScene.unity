@@ -108,6 +108,12 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &15961259 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114135412814261382, guid: 11dfbfb3a06914c959aa1211bcdb2ca1,
+    type: 2}
+  m_PrefabInternal: {fileID: 246733340}
+  m_Script: {fileID: 11500000, guid: 8708d5e2f4ff54897b73f137d74f3f74, type: 3}
 --- !u!1001 &160396526
 Prefab:
   m_ObjectHideFlags: 0
@@ -581,6 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82d39373c226491fbdafa8ba65c48da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightOrder: {fileID: 15961259}
+  leftOrder: {fileID: 1621591028}
 --- !u!65 &964621787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -914,6 +922,12 @@ Prefab:
     - {fileID: 9500000, guid: 4b7d86a0aa423964c96adcd5999c8f1c, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 4b7d86a0aa423964c96adcd5999c8f1c, type: 3}
   m_IsPrefabParent: 0
+--- !u!114 &1621591028 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114135412814261382, guid: 11dfbfb3a06914c959aa1211bcdb2ca1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1404358164}
+  m_Script: {fileID: 11500000, guid: 8708d5e2f4ff54897b73f137d74f3f74, type: 3}
 --- !u!1001 &1708402309
 Prefab:
   m_ObjectHideFlags: 0
