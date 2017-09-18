@@ -25,50 +25,63 @@ public class OrderReceiver : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (currentOrder == null && other.CompareTag("Order")) {
+		if (other.CompareTag("Order")) {
 			Order script = other.GetComponent<Order> ();
-
-			if (script.beingHeld) {
-				if (!colliding.ContainsKey(other))
-					colliding.Add (other, script);
-			} else {
-				currentOrder = script;
-				InitialiseOrder ();
-			}
-		}
-	}
-
-	void OnTriggerStay(Collider other) {
-		if (currentOrder == null && other.CompareTag("Order")) {
-
-			// Check if dictionary has collider
-			if (colliding.ContainsKey(other)) {
-				// Check if object is still being held
-				if (!colliding[other].beingHeld) {
-					currentOrder = colliding [other];
-					colliding.Remove (other);
-					InitialiseOrder ();
-				}
-					
-			} else {
-				// Add Collider to dictionary
-				Order script = other.GetComponent<Order> ();
+			if (currentOrder == null) {
+				script.returnMe = false;
 
 				if (script.beingHeld) {
-					if (!colliding.ContainsKey(other))
+					if (!colliding.ContainsKey (other))
 						colliding.Add (other, script);
 				} else {
 					currentOrder = script;
 					InitialiseOrder ();
 				}
+			} else {
+				script.returnMe = true;
 			}
+		}
+	}
 
+	void OnTriggerStay(Collider other) {
+		if (other.CompareTag("Order")) {
+			if (currentOrder == null) {
+				// Check if dictionary has collider
+				if (colliding.ContainsKey (other)) {
+					colliding [other].returnMe = false;
+
+					// Check if object is still being held
+					if (!colliding [other].beingHeld) {
+						currentOrder = colliding [other];
+						colliding.Remove (other);
+						InitialiseOrder ();
+					}
+					
+				} else {
+					// Add Collider to dictionary
+					Order script = other.GetComponent<Order> ();
+					script.returnMe = false;
+
+					if (script.beingHeld) {
+						if (!colliding.ContainsKey (other))
+							colliding.Add (other, script);
+					} else {
+						currentOrder = script;
+						InitialiseOrder ();
+					}
+				}
+			} else {
+				if (colliding.ContainsKey (other))  {
+					colliding [other].returnMe = true;
+				}
+			}
 
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.CompareTag("Order") && colliding.ContainsKey(other)) {
+			colliding [other].returnMe = true;
 			colliding.Remove (other);
 		}
 	}

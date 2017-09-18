@@ -80,7 +80,7 @@ public class OrderManager : MonoBehaviour {
 				}
 
 				// if not being held, move up
-				if (!ordersList [i].beingHeld) {
+				if (!ordersList [i].beingHeld && ordersList [i].returnMe) {
 					ordersList [i].transform.position = virtualPos [i];
 				}
 			}

@@ -8,5 +8,6 @@ public class Order : Throwable {
 
 	public IngredientID[] ingredients = new IngredientID[numOfIngredients];
 
+	public bool returnMe = true;
 
 }

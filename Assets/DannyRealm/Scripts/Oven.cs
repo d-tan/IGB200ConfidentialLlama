@@ -28,7 +28,10 @@ public class Oven : MonoBehaviour {
 		IngredientID[] pizzaIngredients = new IngredientID[plateScript.ingredients.Length];
 
 		for (int i = 0; i < pizzaIngredients.Length; i++) {
-			pizzaIngredients [i] = plateScript.ingredients [i].ingredientID;
+			if (plateScript.ingredients [i])
+				pizzaIngredients [i] = plateScript.ingredients [i].ingredientID;
+			else
+				pizzaIngredients [i] = IngredientID.None;
 		}
 
 		int side = CheckPizza (ref pizzaIngredients);
