@@ -7,9 +7,11 @@ public class Oven : MonoBehaviour {
 	public OrderReceiver rightOrder;
 	public OrderReceiver leftOrder;
 
+	ScoreManager scoreManager;
+
 	// Use this for initialization
 	void Start () {
-		
+		scoreManager = GameObject.FindGameObjectWithTag ("GameController").GetComponent<ScoreManager> ();
 	}
 	
 	// Update is called once per frame
@@ -45,23 +47,19 @@ public class Oven : MonoBehaviour {
 		if (side > 0) {
 			// Right side
 			Debug.Log("Recipe Right");
-			AwardPoints ();
+			scoreManager.AwardPoints ();
 			rightOrder.OrderCompleted ();
 
 
 		} else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
-			AwardPoints ();
+			scoreManager.AwardPoints ();
 			leftOrder.OrderCompleted ();
 
 		} else {
 			Debug.Log ("No Match");
 		}
-	}
-
-	void AwardPoints() {
-		
 	}
 
 	int CheckPizza(IngredientID[] ingredients) {
