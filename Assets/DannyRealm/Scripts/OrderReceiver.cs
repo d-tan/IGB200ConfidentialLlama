@@ -14,6 +14,11 @@ public class OrderReceiver : MonoBehaviour {
 		parentPos = transform.parent.position;
 	}
 
+	public void OrderCompleted() {
+		Destroy (currentOrder.gameObject);
+		currentOrder = null;
+	}
+
 	void InitialiseOrder() {
 		if (currentOrder) {
 			currentOrder.rb.velocity = new Vector3 (0, 0, 0);

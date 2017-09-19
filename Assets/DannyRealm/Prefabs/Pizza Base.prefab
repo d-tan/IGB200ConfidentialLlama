@@ -127,4 +127,4 @@ MonoBehaviour:
   rb: {fileID: 0}
   beingHeld: 0
   isIngredient: 1
-  ingredientID: 1
+  ingredientID: 2

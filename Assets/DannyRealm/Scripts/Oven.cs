@@ -34,35 +34,54 @@ public class Oven : MonoBehaviour {
 				pizzaIngredients [i] = IngredientID.None;
 		}
 
-		int side = CheckPizza (ref pizzaIngredients);
+		int side = CheckPizza (pizzaIngredients);
 
+		CompleteOrder (side);
+		// Start timers
+		Destroy(plateScript.gameObject);
+	}
+
+	void CompleteOrder(int side) {
 		if (side > 0) {
 			// Right side
 			Debug.Log("Recipe Right");
+			AwardPoints ();
+			rightOrder.OrderCompleted ();
+
+
 		} else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
+			AwardPoints ();
+			leftOrder.OrderCompleted ();
+
 		} else {
-			// No match
-			Debug.Log("No Match");
+			Debug.Log ("No Match");
 		}
 	}
 
-	int CheckPizza(ref IngredientID[] ingredients) {
+	void AwardPoints() {
+		
+	}
+
+	int CheckPizza(IngredientID[] ingredients) {
 		bool right = true;
 		bool left = true;
-		IngredientID[] IDs = rightOrder.currentOrder.ingredients;
+		IngredientID[] IDs = new IngredientID[ingredients.Length];
 
-		if (rightOrder) {
-			right = CompareArrays (ref ingredients, ref IDs);
+
+		if (rightOrder.currentOrder) {
+			IDs = rightOrder.currentOrder.ingredients;
+			right = CompareArrays (ingredients, IDs);
 
 			if (right) 
 				return 1;
 		}
 
-		IDs = leftOrder.currentOrder.ingredients;
-		if (leftOrder) {
-			left = CompareArrays (ref ingredients, ref IDs);
+
+		if (leftOrder.currentOrder) {
+			IDs = leftOrder.currentOrder.ingredients;
+			left = CompareArrays (ingredients, IDs);
 
 			if (left)
 				return -1;
@@ -71,17 +90,23 @@ public class Oven : MonoBehaviour {
 		return 0;
 	}
 
-	bool CompareArrays(ref IngredientID[] pizza, ref IngredientID[] order) {
+	bool CompareArrays(IngredientID[] pizza, IngredientID[] order) {
 		bool match = true;
 		IngredientID id;
 		bool noMatch = true;
+		bool[] checkList = new bool[pizza.Length];
+
+		for (int i = 0; i < checkList.Length; i++) {
+			checkList [i] = false;
+		}
 
 		for (int i = 0; i < pizza.Length; i++) {
 			id = pizza [i];
 			noMatch = true;
 
 			for (int j = 0; j < order.Length; j++) {
-				if (id == order [j]) {
+				if (!checkList[j] && id == order [j]) {
+					checkList [j] = true;
 					noMatch = false;
 					break;
 				}

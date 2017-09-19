@@ -37,28 +37,13 @@ public class Plate : MonoBehaviour {
 				ingredients [i] = script;
 				script.OnPlate ();
 
-//				// Calculate scale
-//				Vector3 newScale = new Vector3 ();
-//				Vector3 curScale = script.transform.localScale;
-//				Vector3 parentScale = transform.localScale;
-//				newScale.x = curScale.x / parentScale.x;
-//				newScale.y = curScale.y / parentScale.y;
-//				newScale.z = curScale.z / parentScale.z;
-////				Debug.Log (newScale);
-//				lastScale = newScale;
-
 				script.transform.parent = this.transform;
 
 				script.transform.localPosition = new Vector3(0, 0.1f, 0);
 
 				script.transform.localPosition += new Vector3(0, 0.1f * i, 0);
 
-				if (i > 0)
-//					script.transform.position += ingredients [i].transform.position;
-
-//				script.transform.position += new Vector3 (0f, 2 * myCollider.bounds.extents.y + 2 * script.myCollider.bounds.extents.y, 0f);
-
-				break;
+				return;
 			}
 		}
 
