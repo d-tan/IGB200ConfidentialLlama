@@ -19,7 +19,6 @@ public class ScoreManager : MonoBehaviour {
 
 
 	void Update() {
-		scoreText.text = scoreValue.ToString();
 
 		// DEBUG
 		if (Input.GetKeyDown ("i") && debug == true) {
@@ -32,6 +31,7 @@ public class ScoreManager : MonoBehaviour {
 	// Increase value of score upon obtaining points
 	public void AwardPoints() {
 		scoreValue += scoreBase;
+		scoreText.text = scoreValue.ToString();
 	}
 
 }
