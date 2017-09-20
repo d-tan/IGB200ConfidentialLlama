@@ -1,21 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 
-	// Use this for initialization
+	public GameObject scoreObject;
+
+	public Text scoreText;
+	private int scoreValue = 0;
+	private const int scoreBase = 5;
+
+	public bool debug = false;
+
+
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+
+	void Update() {
+		scoreText.text = scoreValue.ToString();
+
+		// DEBUG
+		if (Input.GetKeyDown ("i") && debug == true) {
+			AwardPoints ();
+		}
+
 	}
 
+
+	// Increase value of score upon obtaining points
 	public void AwardPoints() {
-		
+		scoreValue += scoreBase;
 	}
+
 }
