@@ -23,7 +23,6 @@ public class CounterTop : MonoBehaviour {
 
 		col.transform.parent = this.transform;
 		col.transform.localPosition = new Vector3 (0, 0.01f, 0);
-
 	}
 
 

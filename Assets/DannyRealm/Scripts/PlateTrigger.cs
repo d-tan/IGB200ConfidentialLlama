@@ -10,10 +10,8 @@ public class PlateTrigger : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Ingredient")) {
-			Debug.Log ("Inredient detected");
 
 			if (other.transform.parent == null) {
-				Debug.Log ("Ingredient has no parent");
 
 				if (!parent.CheckIfFull ()) {
 					Ingredient ingredient = other.GetComponent<Ingredient> ();
@@ -21,13 +19,10 @@ public class PlateTrigger : MonoBehaviour {
 					if (!parent.throwScript.beingHeld && ingredient.beingHeld == false) {
 						parent.IngredientTrigger (ingredient);
 					} else {
-						Debug.Log ("Still being held");
 						if (!colliding.ContainsKey(other)) {
 							colliding.Add (other, ingredient);
 						}
 					}
-				} else {
-					Debug.Log ("Plate is already full");
 				}
 			}
 				
@@ -37,7 +32,6 @@ public class PlateTrigger : MonoBehaviour {
 	void OnTriggerStay(Collider other) {
 
 		if(!parent.throwScript.beingHeld && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
-			Debug.Log ("Colliding and not being held");
 			parent.IngredientTrigger (colliding[other]);
 			colliding.Remove (other);
 		}

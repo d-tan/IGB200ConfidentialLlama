@@ -89,7 +89,7 @@ public class TouchControls : MonoBehaviour {
 
 			Transform raycasted = t_Raycasts [touch.fingerId].transform;
 			if (t_HeldObjects[touch.fingerId] == null && 
-				(raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile") || raycasted.CompareTag("Order"))) {
+				(raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile") || raycasted.CompareTag("Order") || raycasted.CompareTag("Plate"))) {
 
 				// if you tapped a pile
 				if (raycasted.CompareTag("Pile")) {
@@ -99,6 +99,7 @@ public class TouchControls : MonoBehaviour {
 				if (!CheckAlreadyHolding (raycasted.gameObject)) {
 
 					Throwable script = raycasted.GetComponent<Throwable> ();
+					script.StoreParent ();
 					script.transform.parent = null;
 
 					// Store gameObject
