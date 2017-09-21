@@ -19,23 +19,24 @@ public class CounterTopTrigger : MonoBehaviour {
 				if (other.transform.parent == null) {
 					Throwable ingredient = other.GetComponent<Throwable> ();
 
-					if (ingredient.beingHeld) {
+					// If object is being (flicked AND on the same side as this) OR is being held
+					if ((ingredient.flicked && ingredient.side == parent.side) || ingredient.beingHeld) {
 						if (!colliding.ContainsKey(other))
 							colliding.Add (other, ingredient);
 
 					} else {
-						parent.HoldObject (other);
+						parent.HoldObject (other, ingredient);
 					}
 				}
-			} else if (other.CompareTag("PickUp")) {
+			} else if (other.CompareTag("PickUp") || other.CompareTag("Plate")) {
 				Throwable pickUp = other.GetComponent<Throwable> ();
 
-				if (pickUp.beingHeld) {
+				if ((pickUp.flicked && pickUp.side == parent.side) || pickUp.beingHeld) {
 					if (!colliding.ContainsKey(other))
 						colliding.Add (other, pickUp);
 
 				} else {
-					parent.HoldObject (other);
+					parent.HoldObject (other, pickUp);
 				}
 			}
 		}
@@ -44,12 +45,16 @@ public class CounterTopTrigger : MonoBehaviour {
 	void OnTriggerStay(Collider other) {
 		if(parent.currentlyHolding == null && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
 			Debug.Log ("Colliding and not being held");
-			parent.HoldObject (other);
+			Throwable script = colliding [other];
+			if (script.side != parent.side && script.flicked || script.side == parent.side && !script.flicked)
+				parent.HoldObject (other, colliding[other]);
 //			colliding.Remove (other);
 		}
 
+		// If the collider is the one we currently have
 		if (parent.currentlyHolding != null && parent.currentlyHolding.Equals(other)) {
 
+			// If it's in the dictionary and the collider is being picked up
 			if (colliding.ContainsKey(other) && colliding[other].beingHeld) {
 				parent.currentlyHolding = null;
 

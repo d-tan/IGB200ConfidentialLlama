@@ -9,6 +9,7 @@ TagManager:
   - Pile
   - Order
   - Plate
+  - Wall
   layers:
   - Default
   - TransparentFX

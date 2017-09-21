@@ -125,6 +125,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 0}
   rb: {fileID: 0}
+  minVel: 0.04
   beingHeld: 0
+  prevParent: {fileID: 0}
   isIngredient: 1
+  flicked: 0
+  side: 0
   ingredientID: 2

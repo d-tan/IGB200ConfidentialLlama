@@ -186,7 +186,7 @@ public class TouchControls : MonoBehaviour {
 					obj.rb.velocity = vel * flickVelMultiplier;
 				}
 
-
+				obj.flicked = true;
 			}
 
 			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (magnitude > minVel) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);

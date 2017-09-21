@@ -7,8 +7,11 @@ public class CounterTop : MonoBehaviour {
 	GameObject child;
 	Collider trigger;
 
+	public int side = 0;
+
 	// Holding
 	public Collider currentlyHolding;
+	public Throwable currentScript;
 
 
 	void Start() {
@@ -16,8 +19,14 @@ public class CounterTop : MonoBehaviour {
 		trigger = child.GetComponent<Collider> ();
 	}
 
-	public void HoldObject(Collider col) {
+	void Update() {
+		
+	}
+
+	public void HoldObject(Collider col, Throwable script) {
 		currentlyHolding = col;
+		currentScript = script;
+		script.side = side;
 		col.attachedRigidbody.velocity = new Vector3 (0, 0, 0);
 		col.attachedRigidbody.isKinematic = true;
 

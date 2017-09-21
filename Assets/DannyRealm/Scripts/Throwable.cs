@@ -12,11 +12,17 @@ public class Throwable : MonoBehaviour {
 	public Transform prevParent;
 
 	public bool isIngredient = false;
+	public bool flicked = false;
+	public int side = 0;
 
 	// Use this for initialization
 	void Start () {
 		myCollider = GetComponent<Collider> ();
 		rb = GetComponent<Rigidbody> ();
+	}
+
+	void Update() {
+		CheckVelocity ();
 	}
 
 	public void StoreParent() {
@@ -25,11 +31,22 @@ public class Throwable : MonoBehaviour {
 	}
 
 	void CheckVelocity() {
-		if (rb.velocity.sqrMagnitude <= minVel) {
+		if (flicked && rb.velocity.sqrMagnitude <= minVel) {
 			// move back
+//			if (prevParent)
+//				transform.position = new Vector3 (prevParent.position.x, 0f, prevParent.position.z);
+//			else
+//				Destroy (this.gameObject);
+
 			// Reset counter top
 
+
+			flicked = false;
 		}
-			
+	}
+
+	void OnCollisionEnter(Collision col) {
+		if (col.transform.CompareTag ("Wall"))
+			side = 0;
 	}
 }
