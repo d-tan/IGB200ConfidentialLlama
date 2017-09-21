@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114164970192613236}
   m_Layer: 8
   m_Name: Plate
-  m_TagString: PickUp
+  m_TagString: Plate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

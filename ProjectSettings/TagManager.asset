@@ -8,6 +8,7 @@ TagManager:
   - Ingredient
   - Pile
   - Order
+  - Plate
   layers:
   - Default
   - TransparentFX
