@@ -30,12 +30,15 @@ public class CounterTopTrigger : MonoBehaviour {
 				}
 			} else if (other.CompareTag("PickUp") || other.CompareTag("Plate")) {
 				Throwable pickUp = other.GetComponent<Throwable> ();
+				Debug.Log (other.tag);
 
 				if ((pickUp.flicked && pickUp.side == parent.side) || pickUp.beingHeld) {
+					Debug.Log ("Flicked: " + pickUp.flicked + " side: " + (pickUp.side == parent.side) + " beingHeld: " + pickUp.beingHeld);
 					if (!colliding.ContainsKey(other))
 						colliding.Add (other, pickUp);
 
 				} else {
+					Debug.Log ("Parent Hold");
 					parent.HoldObject (other, pickUp);
 				}
 			}
