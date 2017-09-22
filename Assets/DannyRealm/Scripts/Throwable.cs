@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Throwable : MonoBehaviour {
 
@@ -9,8 +10,16 @@ public class Throwable : MonoBehaviour {
 	public float minVel = 0.04f;
 
 	public bool beingHeld = false;
+	public float heldTimer = 0f;
 	public Transform prevParent;
 
+	// Degradation
+	public float degradeTime = 5f;
+	public float degradeTimer = 0f;
+	public Image circle;
+	public GameObject canvas;
+
+	// Meta
 	public bool isIngredient = false;
 	public bool flicked = false;
 	public int side = 0;
@@ -23,6 +32,30 @@ public class Throwable : MonoBehaviour {
 
 	void Update() {
 		CheckVelocity ();
+		Degrade ();
+
+		if (beingHeld)
+			heldTimer += Time.deltaTime;
+	}
+
+	protected virtual void Degrade() {
+		if (!beingHeld && !flicked && transform.parent == null) {
+			if (!canvas.activeSelf) {
+				canvas.SetActive (true);
+			}
+
+			if (degradeTimer < degradeTime) {
+				degradeTimer += Time.deltaTime;
+
+				float percent = 1 - degradeTimer / degradeTime;
+				circle.fillAmount = percent;
+				circle.color = new Color (1.5f - percent, percent, 0f, 1);
+
+			} else {
+				Destroy (this.gameObject);
+			}
+
+		}
 	}
 
 	public void StoreParent() {

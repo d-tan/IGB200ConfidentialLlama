@@ -23,6 +23,7 @@ public class TouchControls : MonoBehaviour {
 	public float minVel = 1;
 	public Vector2 flickVelBounds = new Vector2 ();
 	float flickVelMultiplier = 7f;
+	float flickTime = 0.15f; // time needed for the object to be held before you can flick it
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -89,7 +90,7 @@ public class TouchControls : MonoBehaviour {
 
 			Transform raycasted = t_Raycasts [touch.fingerId].transform;
 			if (t_HeldObjects[touch.fingerId] == null && 
-				(raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile") || raycasted.CompareTag("Order") || raycasted.CompareTag("Plate"))) {
+				(raycasted.CompareTag("PickUp") || raycasted.CompareTag("Ingredient") || raycasted.CompareTag("Pile") || raycasted.CompareTag("Order") || raycasted.CompareTag("Plate") || raycasted.CompareTag("Throw"))) {
 
 				// if you tapped a pile
 				if (raycasted.CompareTag("Pile")) {
@@ -101,6 +102,7 @@ public class TouchControls : MonoBehaviour {
 					Throwable script = raycasted.GetComponent<Throwable> ();
 					script.StoreParent ();
 					script.transform.parent = null;
+					script.heldTimer = 0f;
 
 					// Store gameObject
 					t_HeldObjects [touch.fingerId] = script.gameObject;
@@ -170,7 +172,7 @@ public class TouchControls : MonoBehaviour {
 			float magnitude = t_velocity [touch.fingerId].magnitude;
 
 			// Check if action was a flick
-			if (magnitude > minVel) {
+			if (obj.heldTimer >= flickTime && magnitude > minVel) {
 				Vector3 vel = t_velocity [touch.fingerId];
 //				* Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f)?
 				// Mathf.Clamp(vel.sqrMagnitude * 2, 1f, 2f) * Mathf.Clamp(flickVelMultiplier / vel.sqrMagnitude, 5, flickVelMultiplier * 1.5f)

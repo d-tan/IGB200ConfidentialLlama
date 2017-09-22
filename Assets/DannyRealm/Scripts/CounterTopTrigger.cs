@@ -44,7 +44,6 @@ public class CounterTopTrigger : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 		if(parent.currentlyHolding == null && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
-			Debug.Log ("Colliding and not being held");
 			Throwable script = colliding [other];
 			if (script.side != parent.side && script.flicked || script.side == parent.side && !script.flicked)
 				parent.HoldObject (other, colliding[other]);

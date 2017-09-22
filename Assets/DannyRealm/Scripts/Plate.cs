@@ -36,6 +36,8 @@ public class Plate : MonoBehaviour {
 				Debug.Log ("Ingredient added");
 				ingredients [i] = script;
 				script.OnPlate ();
+				script.canvas.SetActive (false); // turn off canvas for the ingredient
+				throwScript.degradeTimer = 0f; // reset degrade timer
 
 				script.transform.parent = this.transform;
 

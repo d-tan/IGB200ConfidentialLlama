@@ -7,6 +7,7 @@ public class PileOf : MonoBehaviour {
 	public GameObject item;
 	public bool canSpawn = true;
 	string tagToWatch = "Ingredient";
+	GameObject spawnedObject;
 
 	Throwable currentObject;
 
@@ -14,7 +15,11 @@ public class PileOf : MonoBehaviour {
 		if (canSpawn) {
 			canSpawn = false;
 			SpawnItem ();
+		} else {
+			if (spawnedObject == null || spawnedObject.transform.parent != null)
+				canSpawn = true;
 		}
+
 	}
 
 	public void GiveItem(Vector3 coords) {
@@ -23,7 +28,7 @@ public class PileOf : MonoBehaviour {
 	}
 
 	void SpawnItem() {
-		GameObject spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
+		spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
 		currentObject = spawnedObject.GetComponent<Throwable> ();
 		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
 	}

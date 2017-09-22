@@ -10,4 +10,7 @@ public class Order : Throwable {
 
 	public bool returnMe = true;
 
+	// This is to stop it from access the Canvas
+	protected override void Degrade () {
+	}
 }
