@@ -6,7 +6,14 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour {
 
     public GameObject GameManager;
+    public GameObject P1Response;
+    public GameObject P2Response;
+    public GameObject P1OrderReciever;
+    public GameObject P2OrderReciever;
+
     public int tutorialProgression = 1;
+    public int voteToProgress = 0;
+    public int ordersSpawned = 0;
 
     public Text player01Text;
     public Text player02Text;
@@ -17,14 +24,20 @@ public class Tutorial : MonoBehaviour {
     public bool completedTutorial = false;
 
     OrderManager orders;
+    OrderReceiver p1Receiver;
+    OrderReceiver p2Receiver;
 
     // Use this for initialization
     void Start () {
         orders = GameManager.GetComponent<OrderManager>();
+        p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
+        p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
+
+        
 
         if (completedTutorial == false) {
-            //Create the first order (the Tutorial Cheese Pizza)
-            orders.CreateOrder();
+            //Set the level of tutorial progression to the very beginning
+            tutorialProgression = 1;
         } else {
             //Set the level of tutorial progression to the end to skip the tutorial
             tutorialProgression = 19;
@@ -42,12 +55,19 @@ public class Tutorial : MonoBehaviour {
         } else if (tutorialProgression == 2){
             player01Text.text = "So the first step is to make food. Ah, here comes an order!";
             player02Text.text = player01Text.text;
+            while (ordersSpawned != 1) {
+                orders.CreateOrder();
+                ordersSpawned++;
+            }
 
-            player01ResponseText.text = "<TRIGGER PROGRESS>";
+            player01ResponseText.text = "Good timing.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 3) {
             player01Text.text = "Ok, so one of you drag the order to your side of the parlour to accept it. Pressing on the order once you have it lets you see what you need for it.";
             player02Text.text = player01Text.text;
+            if (p1Receiver.currentOrder != null || p2Receiver.currentOrder != null) {
+                print("Order Moved <---- This is the result I want to be seeing.");
+            }
 
             player01ResponseText.text = "<TRIGGER PROGRESS>";
             player02ResponseText.text = player01ResponseText.text;
@@ -161,6 +181,22 @@ public class Tutorial : MonoBehaviour {
     public void progressTutorial() {
         if (tutorialProgression != 20) {
             tutorialProgression++;
+        }
+    }
+
+    public void playerVote() {
+        voteToProgress++;
+
+        if (gameObject.tag == "Player01Tutorial") {
+            P1Response.SetActive(false);
+        }
+        if (gameObject.tag == "Player02Tutorial") {
+            P2Response.SetActive(false);
+        }
+        if (voteToProgress == 2) {
+            progressTutorial();
+            voteToProgress = 0;
+            print("All Players Voted - Progressing");
         }
     }
 }

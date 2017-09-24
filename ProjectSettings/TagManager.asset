@@ -11,6 +11,8 @@ TagManager:
   - Plate
   - Wall
   - Throw
+  - Player01Tutorial
+  - Player02Tutorial
   layers:
   - Default
   - TransparentFX
