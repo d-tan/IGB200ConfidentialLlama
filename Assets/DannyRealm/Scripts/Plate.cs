@@ -4,8 +4,15 @@ using UnityEngine;
 
 public enum IngredientID {
 	None,
+	PizzaBase,
 	Cheese,
-	PizzaBase
+	Pineapple,
+	Mushroom,
+	Basil,
+	Olive,
+	Tomato,
+	Beef,
+	Chicken
 }
 
 public class Plate : MonoBehaviour {
