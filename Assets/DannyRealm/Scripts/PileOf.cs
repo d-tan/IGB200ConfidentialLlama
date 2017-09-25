@@ -34,7 +34,7 @@ public class PileOf : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other) {
-		if (other.CompareTag(tagToWatch) || other.CompareTag("PickUp")) {
+		if (other.CompareTag(tagToWatch) || other.CompareTag("PickUp") || other.CompareTag("Plate")) {
 			canSpawn = false;
 		}
 	}
