@@ -12,6 +12,8 @@ public class Tutorial : MonoBehaviour {
     public GameObject P2OrderReciever;
     public GameObject DraggablePlate;
 
+    IngredientID[] cheesePizza = new IngredientID[] { IngredientID.PizzaBase, IngredientID.Cheese };
+
     public int tutorialProgression = 1;
     public int voteToProgress = 0;
     public int ordersSpawned = 0;
@@ -27,7 +29,7 @@ public class Tutorial : MonoBehaviour {
     OrderManager orders;
     OrderReceiver p1Receiver;
     OrderReceiver p2Receiver;
-    Plate plate;
+    public Plate plate;
 
 	public List<Plate> plateList = new List<Plate>();
 
@@ -36,7 +38,7 @@ public class Tutorial : MonoBehaviour {
         orders = GameManager.GetComponent<OrderManager>();
         p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
         p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
-        plate = DraggablePlate.GetComponent<Plate>();
+        //plate = DraggablePlate.GetComponent<Plate>();
 
 
 
@@ -61,7 +63,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "So the first step is to make food. Ah, here comes an order!";
             player02Text.text = player01Text.text;
             while (ordersSpawned != 1) {
-                orders.CreateOrder();
+                orders.CreateOrder(cheesePizza);
                 ordersSpawned++;
             }
 
@@ -71,7 +73,6 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Ok, so one of you drag the order to your side of the parlour to accept it. Pressing on the order once you have it lets you see what you need for it.";
             player02Text.text = player01Text.text;
             if (p1Receiver.currentOrder != null || p2Receiver.currentOrder != null) {
-                //print("Order Moved <---- This is the result I want to be seeing.");
                 progressTutorial();
             }
 
@@ -83,34 +84,34 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "It doesn't matter what order you make the pizza in, we'll get the idea. Drag the pizza base to a plate, if you don't have it, ask your friend to flick it to you.";
             player02Text.text = player01Text.text;
 
-            /*if (plate.CheckContainsIngredient(plate.ingredients) == true) {
+            if (plate.CheckContainsIngredient(IngredientID.PizzaBase)) {
                 progressTutorial();
-            }*/
+            }
 
-
-            //P1Response.SetActive(false);
-            //P2Response.SetActive(false);
-            player01ResponseText.text = "<TRIGGER PROGRESS>";
-            player02ResponseText.text = player01ResponseText.text;
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+            //player01ResponseText.text = "<TRIGGER PROGRESS>";
+            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 5) {
             player01Text.text = "Next put some cheese on the pizza, again if you don't have the cheese, get your friend to flick some to you.";
             player02Text.text = player01Text.text;
 
-            /*if (plate.CheckContainsIngredient(plate.ingredients) == true) {
+            if (plate.CheckContainsIngredient(IngredientID.PizzaBase) && plate.CheckContainsIngredient(IngredientID.Cheese)) {
                 progressTutorial();
-            }*/
+            }
 
-
-            //P1Response.SetActive(false);
-            //P2Response.SetActive(false);
-            player01ResponseText.text = "<TRIGGER PROGRESS>";
-            player02ResponseText.text = player01ResponseText.text;
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+            //player01ResponseText.text = "<TRIGGER PROGRESS>";
+            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 6) {
             player01Text.text = "Nice, one pizza. Unforunately we can't just send that off, pizzas need to be cooked, people who eat cold pizzas are just weird. Flick the pizza into the oven.";
             player02Text.text = player01Text.text;
 
-            player01ResponseText.text = "<TRIGGER PROGRESS>";
-            player02ResponseText.text = player01ResponseText.text;
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+            //player01ResponseText.text = "<TRIGGER PROGRESS>";
+            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 7) {
             player01Text.text = "So, now the pizza goes into the oven and is cooked. If you had other orders you could be doing them right now. But for now, we wait.";
             player02Text.text = player01Text.text;
@@ -174,6 +175,12 @@ public class Tutorial : MonoBehaviour {
         } else if (tutorialProgression == 17) {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
+
+            while (ordersSpawned != 2) {
+                orders.CreateOrder(cheesePizza);
+                orders.CreateOrder(cheesePizza);
+                ordersSpawned += 2;
+            }
 
             player01ResponseText.text = "Let's do this!";
             player02ResponseText.text = player01ResponseText.text;

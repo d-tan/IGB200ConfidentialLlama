@@ -8,11 +8,13 @@ public class Oven : MonoBehaviour {
 	public OrderReceiver leftOrder;
 
 	ScoreManager scoreManager;
+    Tutorial tutorial;
 
 	// Use this for initialization
 	void Start () {
-		scoreManager = GameObject.FindGameObjectWithTag ("GameController").GetComponent<ScoreManager> ();
-	}
+        scoreManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreManager>();
+        tutorial = GameObject.FindGameObjectWithTag("GameController").GetComponent<Tutorial>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -49,15 +51,20 @@ public class Oven : MonoBehaviour {
 			Debug.Log("Recipe Right");
 			scoreManager.AwardPoints ();
 			rightOrder.OrderCompleted ();
+            if (tutorial.tutorialProgression == 6) {
+                tutorial.progressTutorial();
+            }
 
-
-		} else if (side < 0) {
+        } else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
 			scoreManager.AwardPoints ();
 			leftOrder.OrderCompleted ();
+            if (tutorial.tutorialProgression == 6) {
+                tutorial.progressTutorial();
+            }
 
-		} else {
+        } else {
 			Debug.Log ("No Match");
 		}
 	}
