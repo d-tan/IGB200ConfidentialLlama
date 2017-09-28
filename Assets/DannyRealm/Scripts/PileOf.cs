@@ -10,6 +10,14 @@ public class PileOf : MonoBehaviour {
 	GameObject spawnedObject;
 
 	Throwable currentObject;
+	bool isPlate = false;
+
+	public Tutorial tutorialScript;
+
+	void Start() {
+		if (item.GetComponent<Plate> ())
+			isPlate = true;
+	}
 
 	void Update() {
 		if (canSpawn) {
@@ -30,6 +38,19 @@ public class PileOf : MonoBehaviour {
 	void SpawnItem() {
 		spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
 		currentObject = spawnedObject.GetComponent<Throwable> ();
+
+		if (isPlate && !tutorialScript.completedTutorial) {
+			Debug.Log ("Added plate");
+			tutorialScript.plateList.Add (spawnedObject.GetComponent<Plate> ());
+
+			for (int i = 0; i < tutorialScript.plateList.Count; i++) {
+
+				if (tutorialScript.plateList [i] == null)
+					tutorialScript.plateList.RemoveAt (i);
+				Debug.Log (tutorialScript.plateList [i].name);
+			}
+		}
+
 		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
 	}
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4374901, g: 0.48531127, b: 0.56558615, a: 1}
+  m_IndirectSpecularColor: {r: 0.4374895, g: 0.4853106, b: 0.56558496, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -801,6 +801,7 @@ MonoBehaviour:
   player01ResponseText: {fileID: 131616616}
   player02ResponseText: {fileID: 1695258755}
   completedTutorial: 0
+  plateList: []
 --- !u!1 &548902922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,6 +3064,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114304868940219556, guid: 8cd8a6f85167d414c8e93e5d55741f6e,
+        type: 2}
+      propertyPath: tutorialScript
+      value: 
+      objectReference: {fileID: 512653440}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8cd8a6f85167d414c8e93e5d55741f6e, type: 2}
   m_IsPrefabParent: 0

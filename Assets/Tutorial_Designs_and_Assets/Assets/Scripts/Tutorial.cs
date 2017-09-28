@@ -29,6 +29,8 @@ public class Tutorial : MonoBehaviour {
     OrderReceiver p2Receiver;
     Plate plate;
 
+	public List<Plate> plateList = new List<Plate>();
+
     // Use this for initialization
     void Start () {
         orders = GameManager.GetComponent<OrderManager>();

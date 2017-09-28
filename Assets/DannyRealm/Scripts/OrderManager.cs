@@ -52,7 +52,7 @@ public class OrderManager : MonoBehaviour {
 			CreateOrder ();
 		}
 
-		if (!tutorialScript.completedTutorial) 
+		if (tutorialScript.completedTutorial) 
 			OrderSpawner ();
 		
 		MoveUpOrders ();
