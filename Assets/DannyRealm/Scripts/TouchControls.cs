@@ -23,7 +23,7 @@ public class TouchControls : MonoBehaviour {
 	public float minVel = 1;
 	public Vector2 flickVelBounds = new Vector2 ();
 	float flickVelMultiplier = 7f;
-	float flickTime = 0.15f; // time needed for the object to be held before you can flick it
+	float flickTime = 0.085f; // time needed for the object to be held before you can flick it
 
 	// Mouse
 	RaycastHit m_RayCast;

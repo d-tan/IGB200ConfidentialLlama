@@ -51,21 +51,23 @@ public class Oven : MonoBehaviour {
 			Debug.Log("Recipe Right");
 			scoreManager.AwardPoints ();
 			rightOrder.OrderCompleted ();
-            if (tutorial.tutorialProgression == 6) {
-                tutorial.progressTutorial();
-            }
+			TutorialProgress ();
 
         } else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
 			scoreManager.AwardPoints ();
 			leftOrder.OrderCompleted ();
-            if (tutorial.tutorialProgression == 6) {
-                tutorial.progressTutorial();
-            }
+			TutorialProgress ();
 
         } else {
 			Debug.Log ("No Match");
+		}
+	}
+
+	void TutorialProgress() {
+		if (tutorial.tutorialProgression == 6) {
+			tutorial.progressTutorial();
 		}
 	}
 

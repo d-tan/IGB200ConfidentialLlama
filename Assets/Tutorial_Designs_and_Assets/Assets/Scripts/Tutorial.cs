@@ -31,8 +31,6 @@ public class Tutorial : MonoBehaviour {
     OrderReceiver p2Receiver;
     public Plate plate;
 
-	public List<Plate> plateList = new List<Plate>();
-
     // Use this for initialization
     void Start () {
         orders = GameManager.GetComponent<OrderManager>();
@@ -176,7 +174,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
 
-            while (ordersSpawned != 2) {
+            while (ordersSpawned < 2) {
                 orders.CreateOrder(cheesePizza);
                 orders.CreateOrder(cheesePizza);
                 ordersSpawned += 2;

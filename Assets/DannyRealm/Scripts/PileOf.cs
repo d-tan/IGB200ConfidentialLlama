@@ -12,7 +12,10 @@ public class PileOf : MonoBehaviour {
 	Throwable currentObject;
 	bool isPlate = false;
 
+	// Tutorial stuff
+	[Header("Tutorial Stuff")]
 	public Tutorial tutorialScript;
+	public GameObject[] displayObjects;
 
 	void Start() {
 		if (item.GetComponent<Plate> ())
@@ -24,34 +27,36 @@ public class PileOf : MonoBehaviour {
 			canSpawn = false;
 			SpawnItem ();
 		} else {
-			if (spawnedObject == null || spawnedObject.transform.parent != null)
+			if (tutorialScript.completedTutorial && (spawnedObject == null || spawnedObject.transform.parent != null))
 				canSpawn = true;
 		}
 
+		// Tutorial Only
+		if (!tutorialScript.completedTutorial && currentObject == null) {
+			canSpawn = true;
+		}
 	}
 
 	public void GiveItem(Vector3 coords) {
 		Instantiate (item, coords, Quaternion.identity);
-
 	}
 
 	void SpawnItem() {
 		spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
 		currentObject = spawnedObject.GetComponent<Throwable> ();
 
+		// Tutorial only
 		if (isPlate && !tutorialScript.completedTutorial) {
-			Debug.Log ("Added plate");
-			tutorialScript.plateList.Add (spawnedObject.GetComponent<Plate> ());
-
-			for (int i = 0; i < tutorialScript.plateList.Count; i++) {
-
-				if (tutorialScript.plateList [i] == null)
-					tutorialScript.plateList.RemoveAt (i);
-				Debug.Log (tutorialScript.plateList [i].name);
-			}
+			tutorialScript.plate = spawnedObject.GetComponent<Plate> ();
 		}
 
 		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
+	}
+
+	public void ToggleDisplayObjects(bool state) {
+		for (int i = 0; i < displayObjects.Length; i++) {
+			displayObjects [i].SetActive (state);
+		}
 	}
 
 	void OnTriggerStay(Collider other) {
@@ -61,7 +66,7 @@ public class PileOf : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (currentObject.myCollider.Equals(other)) {
+		if (currentObject.myCollider.Equals(other) && tutorialScript.completedTutorial) {
 			canSpawn = true;
 		}
 	}

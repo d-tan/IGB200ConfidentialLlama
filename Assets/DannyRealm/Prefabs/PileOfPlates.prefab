@@ -287,3 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 1435963380271032, guid: db05457e0c97643faa7222a945434529, type: 2}
   canSpawn: 1
+  tutorialScript: {fileID: 0}
+  displayObjects:
+  - {fileID: 1774255567734842}
+  - {fileID: 1613610978737684}
+  - {fileID: 1169189520275068}
