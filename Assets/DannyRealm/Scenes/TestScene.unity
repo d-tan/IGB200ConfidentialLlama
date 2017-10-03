@@ -1548,7 +1548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &589300669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2729,12 +2729,12 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 965992970}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 13400000, guid: 47ee94ecf30304908be53a3336d61706, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.058554, y: 8.27069, z: 5.2228065}
-  m_Center: {x: -0.0000770092, y: 4.111197, z: -9.909487}
+  m_Size: {x: 6.21512, y: 8.27069, z: 4.2150574}
+  m_Center: {x: 0.062283278, y: 4.111197, z: -10.413362}
 --- !u!114 &965992973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3295,7 +3295,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277700412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 11.3}
+  m_LocalPosition: {x: 0, y: 0, z: 13.56}
   m_LocalScale: {x: 31, y: 5, z: 2}
   m_Children: []
   m_Father: {fileID: 996520442}
@@ -3415,8 +3415,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 1, z: 1.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9756498, y: 1.1032007, z: 1.0751398}
+  m_Center: {x: 0.017189406, y: 0.05160043, z: -0.5266275}
 --- !u!33 &1352677311
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4196,6 +4196,10 @@ Prefab:
     - target: {fileID: 4988630260296250, guid: 5c6834598591149478119324135a9bc3, type: 2}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333282316893642, guid: 5c6834598591149478119324135a9bc3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c6834598591149478119324135a9bc3, type: 2}
@@ -5540,6 +5544,14 @@ Prefab:
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
