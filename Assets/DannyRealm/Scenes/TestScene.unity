@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d5be4931f9c4c95ba2a7ae5fbacc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseControl: 1
+  mouseControl: 0
   t_HeldObjects:
   - {fileID: 0}
   - {fileID: 0}
