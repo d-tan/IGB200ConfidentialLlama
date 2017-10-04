@@ -26,7 +26,15 @@ public class PauseResume : MonoBehaviour {
 		}
 	}
 
-	public void QuitToMenu() {
+	public void ChangeToTutorial() {
+		SceneManager.LoadScene (1);
+	}
+
+	public void ChangeToMenu() {
 		SceneManager.LoadScene (0);
+	}
+
+	public void QuitGame() {
+		Application.Quit();
 	}
 }
