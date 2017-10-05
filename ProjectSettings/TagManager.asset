@@ -13,6 +13,8 @@ TagManager:
   - Throw
   - Player01Tutorial
   - Player02Tutorial
+  - RedoTutorialButtons
+  - EndTutorialButtons
   layers:
   - Default
   - TransparentFX

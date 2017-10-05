@@ -6,10 +6,21 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour {
 
     public GameObject GameManager;
+
     public GameObject P1Response;
     public GameObject P2Response;
+
     public GameObject P1OrderReciever;
     public GameObject P2OrderReciever;
+
+    public GameObject P1EndOptionY;
+    public GameObject P2EndOptionY;
+    public GameObject P1EndOptionN;
+    public GameObject P2EndOptionN;
+
+    public GameObject P1Tutorial;
+    public GameObject P2Tutorial;
+
     public GameObject DraggablePlate;
 
     IngredientID[] cheesePizza = new IngredientID[] { IngredientID.PizzaBase, IngredientID.Cheese };
@@ -20,6 +31,11 @@ public class Tutorial : MonoBehaviour {
 
     public Text player01Text;
     public Text player02Text;
+
+    public Text P1EndOptionYText;
+    public Text P2EndOptionYText;
+    public Text P1EndOptionNText;
+    public Text P2EndOptionNText;
 
     public Text player01ResponseText;
     public Text player02ResponseText;
@@ -36,13 +52,11 @@ public class Tutorial : MonoBehaviour {
         orders = GameManager.GetComponent<OrderManager>();
         p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
         p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
-        //plate = DraggablePlate.GetComponent<Plate>();
-
-
 
         if (completedTutorial == false) {
             //Set the level of tutorial progression to the very beginning
             tutorialProgression = 1;
+            //tutorialProgression = 18; //Debug Move
         } else {
             //Set the level of tutorial progression to the end to skip the tutorial
             tutorialProgression = 19;
@@ -60,7 +74,7 @@ public class Tutorial : MonoBehaviour {
         } else if (tutorialProgression == 2){
             player01Text.text = "So the first step is to make food. Ah, here comes an order!";
             player02Text.text = player01Text.text;
-            while (ordersSpawned != 1) {
+            while (ordersSpawned != 2) {
                 orders.CreateOrder(cheesePizza);
                 ordersSpawned++;
             }
@@ -68,7 +82,7 @@ public class Tutorial : MonoBehaviour {
             player01ResponseText.text = "Good timing.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 3) {
-            player01Text.text = "Ok, so one of you drag the order to your side of the parlour to accept it. Pressing on the order once you have it lets you see what you need for it.";
+            player01Text.text = "Ok, so drag one of the orders to your side of the parlour to accept it. Pressing on the order once you have it lets you see what you need for it.";
             player02Text.text = player01Text.text;
             if (p1Receiver.currentOrder != null || p2Receiver.currentOrder != null) {
                 progressTutorial();
@@ -192,13 +206,28 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "I think you're ready to go for real. What do you two say? You can say no and we'll do it again.";
             player02Text.text = player01Text.text;
 
-            player01ResponseText.text = "I'm ready!!";
-            player02ResponseText.text = player01ResponseText.text;
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+
+            P1EndOptionYText.text = "I'm ready!!";
+            P2EndOptionYText.text = P1EndOptionYText.text;
+            P1EndOptionNText.text = "Can you tell me again?";
+            P2EndOptionNText.text = P1EndOptionNText.text;
         } else if (tutorialProgression == 20) {
-            player01Text.enabled = false;
-            player02Text.enabled = false;
+            P1Tutorial.SetActive(false);
+            P2Tutorial.SetActive(false);
+
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+
             player01ResponseText.enabled = false;
             player02ResponseText.enabled = false;
+
+            P1EndOptionY.SetActive(false);
+            P1EndOptionN.SetActive(false);
+            P2EndOptionY.SetActive(false);
+            P2EndOptionN.SetActive(false);
+
             completedTutorial = true;
         } else if (tutorialProgression < 1 || tutorialProgression > 20){
             print("Tutorial Error: tutorialProgression is not >= 1 and <= 20.");
@@ -208,22 +237,48 @@ public class Tutorial : MonoBehaviour {
     public void progressTutorial() {
         if (tutorialProgression != 20) {
             tutorialProgression++;
+            
+        }
+        if (tutorialProgression == 19) {
+            P1EndOptionY.SetActive(true);
+            P1EndOptionN.SetActive(true);
+            P2EndOptionY.SetActive(true);
+            P2EndOptionN.SetActive(true);
         }
     }
 
     public void playerVote() {
         voteToProgress++;
 
-        if (gameObject.tag == "Player01Tutorial") {
-            P1Response.SetActive(false);
-        }
-        if (gameObject.tag == "Player02Tutorial") {
+        //this.gameObject.SetActive(false);
+
+        /*if (this.gameObject.tag == "Player02Tutorial") {
             P2Response.SetActive(false);
-        }
+            print("This object is part of the tutorial02");
+        }*/
+
         if (voteToProgress == 2) {
             progressTutorial();
             voteToProgress = 0;
             print("All Players Voted - Progressing");
+
+            P1Response.SetActive(true);
+            P2Response.SetActive(true);
+        }
+
+        if (voteToProgress < 0) {
+            voteToProgress = 0;
+            print("Player Voted to Redo - Resetting");
+
+            P1Response.SetActive(true);
+            P2Response.SetActive(true);
+
+            P1EndOptionY.SetActive(false);
+            P1EndOptionN.SetActive(false);
+            P2EndOptionY.SetActive(false);
+            P2EndOptionN.SetActive(false);
+
+            tutorialProgression = 1;
         }
     }
 }

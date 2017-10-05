@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerVoting : MonoBehaviour {
+public class ButtonController : MonoBehaviour {
 
     public GameObject GameManager;
+    public GameObject responseButton;
+
     public GameObject Player01Response;
     public GameObject Player02Response;
 
@@ -24,18 +26,12 @@ public class PlayerVoting : MonoBehaviour {
     }
 
     public void playerVote() {
-        tutorialScript.voteToProgress++;
+        //tutorialScript.voteToProgress++;
         
-        if(gameObject.tag == "Player01Tutorial") {
-            Player01Response.SetActive(false);
-        }
-        if (gameObject.tag == "Player02Tutorial") {
-            Player02Response.SetActive(false);
-        }
-        if (voteToProgress == 2) {
-            tutorialScript.progressTutorial();
-            voteToProgress = 0;
-            print("All Players Voted - Progressing");
-        }
+        responseButton.SetActive(false);
+
+        tutorialScript.playerVote();
+
+        
     }
 }
