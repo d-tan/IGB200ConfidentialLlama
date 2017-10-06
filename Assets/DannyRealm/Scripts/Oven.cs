@@ -58,6 +58,9 @@ public class Oven : MonoBehaviour {
 			Debug.Log ("Recipe Left");
 			scoreManager.AwardPoints ();
 			leftOrder.OrderCompleted ();
+            if (tutorial.tutorialProgression == 17) {
+                tutorial.tutorialOrdersCompleted++;
+            }
 			TutorialProgress ();
 
         } else {
@@ -69,7 +72,11 @@ public class Oven : MonoBehaviour {
 		if (tutorial.tutorialProgression == 6) {
 			tutorial.progressTutorial();
 		}
-	}
+        if (tutorial.tutorialProgression == 17) {
+            Debug.Log(tutorial.tutorialOrdersCompleted + "/2 test orders completed");
+            tutorial.progressTutorial();
+        }
+    }
 
 	int CheckPizza(IngredientID[] ingredients) {
 		bool right = true;
