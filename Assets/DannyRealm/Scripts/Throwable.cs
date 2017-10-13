@@ -81,8 +81,13 @@ public class Throwable : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col) {
-		if (col.transform.CompareTag ("Wall"))
+		if (col.transform.CompareTag ("Wall")) {
 			side = 0;
+		} else if (col.transform.CompareTag("Waiter")) {
+			Debug.Log ("Hit waiter");
+			Destroy (this.gameObject);
+		}
+
 	}
 
 	public void TurnOnRender() {

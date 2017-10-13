@@ -15,6 +15,7 @@ TagManager:
   - Player02Tutorial
   - RedoTutorialButtons
   - EndTutorialButtons
+  - Waiter
   layers:
   - Default
   - TransparentFX

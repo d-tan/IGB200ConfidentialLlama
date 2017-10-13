@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224490067582754212}
   - component: {fileID: 222373991075604490}
   - component: {fileID: 114756509705339972}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 223640053246678036}
   - component: {fileID: 114047866498722478}
   - component: {fileID: 114069035738719794}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: TimerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
