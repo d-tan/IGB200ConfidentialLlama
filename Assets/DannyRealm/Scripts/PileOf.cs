@@ -50,6 +50,10 @@ public class PileOf : MonoBehaviour {
 			tutorialScript.plate = spawnedObject.GetComponent<Plate> ();
 		}
 
+		if (tutorialScript.completedTutorial) {
+			currentObject.ToggleRender (false);
+		}
+
 		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
 	}
 

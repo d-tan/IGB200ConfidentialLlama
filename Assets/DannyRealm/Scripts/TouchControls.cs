@@ -23,7 +23,7 @@ public class TouchControls : MonoBehaviour {
 	public float minVel = 1;
 	public Vector2 flickVelBounds = new Vector2 ();
 	float flickVelMultiplier = 7f;
-	float flickTime = 0.085f; // time needed for the object to be held before you can flick it
+	float flickTime = 0.07f; // time needed for the object to be held before you can flick it
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -103,7 +103,7 @@ public class TouchControls : MonoBehaviour {
 					script.StoreParent ();
 					script.transform.parent = null;
 					script.heldTimer = 0f;
-					script.TurnOnRender ();
+					script.ToggleRender (true);
 
 					// Store gameObject
 					t_HeldObjects [touch.fingerId] = script.gameObject;

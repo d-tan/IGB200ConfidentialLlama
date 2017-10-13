@@ -19,7 +19,7 @@ public class Plate : MonoBehaviour {
 
 	const int numOfIngredients = 4;
 	public Ingredient[] ingredients = new Ingredient[numOfIngredients];
-	public Transform[] positions = new Transform[numOfIngredients];
+//	public Transform[] positions = new Transform[numOfIngredients];
 
 	// Use this for initialization
 	void Start () {
@@ -48,7 +48,7 @@ public class Plate : MonoBehaviour {
 
 				script.transform.localPosition += new Vector3(0, 0.1f * i, 0);
 
-				return;
+				break;
 			}
 		}
 

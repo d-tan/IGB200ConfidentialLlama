@@ -234,7 +234,7 @@ MonoBehaviour:
   isIngredient: 1
   flicked: 0
   side: 0
-  ingredientID: 1
+  ingredientID: 2
 --- !u!222 &222868542669040964
 CanvasRenderer:
   m_ObjectHideFlags: 1

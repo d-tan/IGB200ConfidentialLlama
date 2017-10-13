@@ -648,8 +648,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320692544126054}
-  m_LocalRotation: {x: 0.000001809995, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.6, y: -0.001, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -9.35, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4171838532765074}
@@ -693,7 +693,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 784a934430407ad45ab9ceab60206dfa, type: 2}
-  - {fileID: 2100000, guid: f2e537aa349fa9f4c8b6771a9ece5100, type: 2}
+  - {fileID: 2100000, guid: 5d77e04f8f2e04528bef0066126e234f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -792,7 +792,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 784a934430407ad45ab9ceab60206dfa, type: 2}
-  - {fileID: 2100000, guid: f2e537aa349fa9f4c8b6771a9ece5100, type: 2}
+  - {fileID: 2100000, guid: 5d77e04f8f2e04528bef0066126e234f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114255938164262214
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114392855778876298
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114427189141588120
@@ -1418,7 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114445802970884814
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114530302426296230
@@ -1446,7 +1446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114764067462432052
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114783579705519370
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114829255056102994
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}
 --- !u!114 &114892476354484552
@@ -1526,6 +1526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38746733c2ac411ba798b960deb0b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
+  side: -1
   currentlyHolding: {fileID: 0}
   currentScript: {fileID: 0}

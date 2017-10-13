@@ -8,7 +8,7 @@ public class Throwable : MonoBehaviour {
 	public Collider myCollider;
 	public Rigidbody rb;
 	protected MeshRenderer myRenderer;
-	public float minVel = 0.04f;
+	public float minVel = 0.08f;
 
 	public bool beingHeld = false;
 	public float heldTimer = 0f;
@@ -25,11 +25,15 @@ public class Throwable : MonoBehaviour {
 	public bool flicked = false;
 	public int side = 0;
 
+	void Awake() {
+		myRenderer = GetComponent<MeshRenderer> ();
+	}
+
 	// Use this for initialization
-	protected virtual void Start () {
+	void Start () {
 		myCollider = GetComponent<Collider> ();
 		rb = GetComponent<Rigidbody> ();
-		myRenderer = GetComponent<MeshRenderer> ();
+
 	}
 
 	void Update() {
@@ -81,8 +85,9 @@ public class Throwable : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col) {
-		if (col.transform.CompareTag ("Wall")) {
+		if (!beingHeld && col.transform.CompareTag ("Wall")) {
 			side = 0;
+			Debug.Log ("Hit a wall");
 		} else if (col.transform.CompareTag("Waiter")) {
 			Debug.Log ("Hit waiter");
 			Destroy (this.gameObject);
@@ -90,7 +95,8 @@ public class Throwable : MonoBehaviour {
 
 	}
 
-	public void TurnOnRender() {
-		myRenderer.enabled = true;
+	public void ToggleRender(bool state) {
+		
+		myRenderer.enabled = state;
 	}
 }

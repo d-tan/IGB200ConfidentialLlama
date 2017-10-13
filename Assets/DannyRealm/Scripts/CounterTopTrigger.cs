@@ -17,28 +17,26 @@ public class CounterTopTrigger : MonoBehaviour {
 		if (parent.currentlyHolding == null) {
 			if (other.CompareTag ("Ingredient")) {
 				if (other.transform.parent == null) {
-					Throwable ingredient = other.GetComponent<Throwable> ();
-
-					// If object is being (flicked AND on the same side as this) OR is being held
-					if ((ingredient.flicked && ingredient.side == parent.side) || ingredient.beingHeld) {
-						if (!colliding.ContainsKey(other))
-							colliding.Add (other, ingredient);
-
-					} else {
-						parent.HoldObject (other, ingredient);
-					}
+					DoTrigger (other);
 				}
 			} else if (other.CompareTag("PickUp") || other.CompareTag("Plate")) {
-				Throwable pickUp = other.GetComponent<Throwable> ();
+				DoTrigger (other);
+			}
+		}
+	}
 
-				if ((pickUp.flicked && pickUp.side == parent.side) || pickUp.beingHeld) {
-					Debug.Log ("Flicked: " + pickUp.flicked + " side: " + (pickUp.side == parent.side) + " beingHeld: " + pickUp.beingHeld);
-					if (!colliding.ContainsKey(other))
-						colliding.Add (other, pickUp);
+	void DoTrigger(Collider other) {
+		Throwable ingredient = other.GetComponent<Throwable> ();
 
-				} else {
-					parent.HoldObject (other, pickUp);
-				}
+		Debug.Log ("flick: " + ingredient.flicked + " Notside: " + (ingredient.side == parent.side) + " held: " + ingredient.beingHeld);
+
+		// If object is being (flicked AND on the same side as this) OR is being held
+		if (!(ingredient.flicked && ingredient.side == parent.side)) {
+			if (ingredient.beingHeld) {
+				if (!colliding.ContainsKey (other))
+					colliding.Add (other, ingredient);
+			} else {
+				parent.HoldObject (other, ingredient);
 			}
 		}
 	}
@@ -46,7 +44,10 @@ public class CounterTopTrigger : MonoBehaviour {
 	void OnTriggerStay(Collider other) {
 		if(parent.currentlyHolding == null && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
 			Throwable script = colliding [other];
-			if (script.side != parent.side && script.flicked || script.side == parent.side && !script.flicked)
+
+			Debug.Log ("1: " + (script.side != parent.side && script.flicked) + " 2: " + (script.side == parent.side && !script.flicked));
+
+			if (script.side != parent.side || !script.flicked)
 				parent.HoldObject (other, colliding[other]);
 //			colliding.Remove (other);
 		}

@@ -8,6 +8,10 @@ public class PlateTrigger : MonoBehaviour {
 	Dictionary<Collider, Ingredient> colliding = new Dictionary<Collider, Ingredient>();
 	Collider[] colliderKeys;
 
+	void Start() {
+		parent = transform.parent.GetComponent<Plate> ();
+	}
+
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Ingredient")) {
 
@@ -35,7 +39,6 @@ public class PlateTrigger : MonoBehaviour {
 			parent.IngredientTrigger (colliding[other]);
 			colliding.Remove (other);
 		}
-
 	}
 
 	void OnTriggerExit(Collider other) {
