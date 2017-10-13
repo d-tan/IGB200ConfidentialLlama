@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: dd477a39c13cec5469bdeb5cf1b18a38
-timeCreated: 1507795209
+guid: 618c00a8a0f53430d9481066b9afd600
+timeCreated: 1507874187
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Plane.003
+    4300000: Pizza0(Blank)
   materials:
     importMaterials: 1
     materialName: 0

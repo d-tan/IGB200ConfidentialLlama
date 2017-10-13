@@ -15,7 +15,7 @@ public class OrderManager : MonoBehaviour {
 
 	[Header("Conveyor Belt")]
 	public bool moveOrders = true;
-	float orderSpacing = 1.5f;
+	float orderSpacing = 1f;
 	float beltSpeed = 3.0f;
 	static List<Order> ordersList = new List<Order>();
 	static List<Vector3> virtualPos = new List<Vector3>();
@@ -99,7 +99,7 @@ public class OrderManager : MonoBehaviour {
 		availableIngredients.Clear ();
 		for (int i = 0; i < numOfIngredients; i++) {
 			IngredientID id = (IngredientID)i;
-			if (id != IngredientID.None && id != IngredientID.PizzaBase && id != IngredientID.Cheese)
+			if (id != IngredientID.None && id != IngredientID.Sauce && id != IngredientID.Cheese)
 				availableIngredients.Add (id);
 		}
 
@@ -107,7 +107,7 @@ public class OrderManager : MonoBehaviour {
 		for (int i = 0; i < arrayLength; i++) {
 			ingredientsList [i] = IngredientID.None;
 		}
-		ingredientsList [0] = IngredientID.PizzaBase;
+		ingredientsList [0] = IngredientID.Sauce;
 		ingredientsList [1] = IngredientID.Cheese;
 
 		// Randomise Order

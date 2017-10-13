@@ -103,6 +103,7 @@ public class TouchControls : MonoBehaviour {
 					script.StoreParent ();
 					script.transform.parent = null;
 					script.heldTimer = 0f;
+					script.TurnOnRender ();
 
 					// Store gameObject
 					t_HeldObjects [touch.fingerId] = script.gameObject;

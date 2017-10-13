@@ -23,7 +23,7 @@ public class Tutorial : MonoBehaviour {
 
     public GameObject DraggablePlate;
 
-    IngredientID[] cheesePizza = new IngredientID[] { IngredientID.PizzaBase, IngredientID.Cheese };
+    IngredientID[] cheesePizza = new IngredientID[] { IngredientID.Sauce, IngredientID.Cheese };
 
     public int tutorialProgression = 1;
     public int voteToProgress = 0;
@@ -110,7 +110,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "You can flick the ingredients around to move them. Every pizza starts with the base, that's what you put ingredients on.";
             player02Text.text = player01Text.text;
 
-            if (plate.CheckContainsIngredient(IngredientID.PizzaBase)) {
+            if (plate.CheckContainsIngredient(IngredientID.Sauce)) {
                 progressTutorial();
             }
 
@@ -122,7 +122,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "For the cheese pizza, you will need to add, you guessed it; some cheese. if you don't have the cheese, get your friend to flick some to you.";
             player02Text.text = player01Text.text;
 
-            if (plate.CheckContainsIngredient(IngredientID.PizzaBase) && plate.CheckContainsIngredient(IngredientID.Cheese)) {
+            if (plate.CheckContainsIngredient(IngredientID.Sauce) && plate.CheckContainsIngredient(IngredientID.Cheese)) {
                 progressTutorial();
             }
 
@@ -204,7 +204,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
 
-            Debug.Log (Time.timeSinceLevelLoad);
+//            Debug.Log (Time.timeSinceLevelLoad);
 
             while (ordersSpawned < 2) {
                 orders.CreateOrder(cheesePizza);

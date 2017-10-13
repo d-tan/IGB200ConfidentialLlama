@@ -7,6 +7,7 @@ public class Throwable : MonoBehaviour {
 
 	public Collider myCollider;
 	public Rigidbody rb;
+	protected MeshRenderer myRenderer;
 	public float minVel = 0.04f;
 
 	public bool beingHeld = false;
@@ -25,9 +26,10 @@ public class Throwable : MonoBehaviour {
 	public int side = 0;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		myCollider = GetComponent<Collider> ();
 		rb = GetComponent<Rigidbody> ();
+		myRenderer = GetComponent<MeshRenderer> ();
 	}
 
 	void Update() {
@@ -81,5 +83,9 @@ public class Throwable : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		if (col.transform.CompareTag ("Wall"))
 			side = 0;
+	}
+
+	public void TurnOnRender() {
+		myRenderer.enabled = true;
 	}
 }
