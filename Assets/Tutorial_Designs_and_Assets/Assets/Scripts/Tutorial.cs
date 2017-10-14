@@ -171,6 +171,8 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Right... So these are our pizza boys and girls, they work here. They'll deliver the boxed pizza for you.";
             player02Text.text = player01Text.text;
 
+            waiters.tutorialSpawn = true;
+
             player01ResponseText.text = "And I get paid now right?";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 12) {

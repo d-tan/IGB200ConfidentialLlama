@@ -1152,6 +1152,7 @@ MonoBehaviour:
   DraggablePlate: {fileID: 0}
   tutorialProgression: 1
   voteToProgress: 0
+  waitersSpawned: 0
   ordersSpawned: 0
   tutorialOrdersCompleted: 0
   timeBeforeBoxHide: 0
@@ -1208,6 +1209,8 @@ MonoBehaviour:
     type: 2}
   spawnPoint: {x: -3.5, y: 0, z: -15}
   spawnTime: {x: 5.5, y: 15}
+  tutorialSpawnTime: {x: 3, y: 4}
+  tutorialSpawn: 0
 --- !u!1 &589300668
 GameObject:
   m_ObjectHideFlags: 0
