@@ -208,6 +208,9 @@ public class Tutorial : MonoBehaviour {
             P1Tutorial.SetActive(true);
             P2Tutorial.SetActive(true);
 
+            P1Response.SetActive(true);
+            P2Response.SetActive(true);
+
             player01ResponseText.text = "Thanks!";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 15) {
