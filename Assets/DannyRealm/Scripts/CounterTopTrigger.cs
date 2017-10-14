@@ -28,7 +28,7 @@ public class CounterTopTrigger : MonoBehaviour {
 	void DoTrigger(Collider other) {
 		Throwable ingredient = other.GetComponent<Throwable> ();
 
-		Debug.Log ("flick: " + ingredient.flicked + " Notside: " + (ingredient.side == parent.side) + " held: " + ingredient.beingHeld);
+//		Debug.Log ("flick: " + ingredient.flicked + " Notside: " + (ingredient.side == parent.side) + " held: " + ingredient.beingHeld);
 
 		// If object is being (flicked AND on the same side as this) OR is being held
 		if (!(ingredient.flicked && ingredient.side == parent.side)) {
@@ -45,7 +45,7 @@ public class CounterTopTrigger : MonoBehaviour {
 		if(parent.currentlyHolding == null && colliding.ContainsKey(other) && !colliding[other].beingHeld) {
 			Throwable script = colliding [other];
 
-			Debug.Log ("1: " + (script.side != parent.side && script.flicked) + " 2: " + (script.side == parent.side && !script.flicked));
+//			Debug.Log ("1: " + (script.side != parent.side && script.flicked) + " 2: " + (script.side == parent.side && !script.flicked));
 
 			if (script.side != parent.side || !script.flicked)
 				parent.HoldObject (other, colliding[other]);

@@ -9,16 +9,18 @@ public class WaiterManager : MonoBehaviour {
 
 	// Timer
 	public Vector2 spawnTime = new Vector2 (3, 9);
+	public Vector2 tutorialSpawnTime = new Vector2 (4, 7);
 	float spawnTimer = 0f;
 
 	Tutorial tutorialScript;
+	public bool tutorialSpawn = false;
 
 	void Start() {
 		tutorialScript = GetComponent<Tutorial> ();
 	}
 
 	void Update() {
-		if (tutorialScript.completedTutorial) {
+		if (tutorialScript.completedTutorial || tutorialSpawn) {
 			spawnTimer -= Time.deltaTime;
 
 			if (spawnTimer <= 0) {
@@ -27,8 +29,13 @@ public class WaiterManager : MonoBehaviour {
 		}
 	}
 
+
 	public void SpawnWaiter() {
 		Instantiate (waiterObject, spawnPoint, Quaternion.identity);
-		spawnTimer = Random.Range (spawnTime.x, spawnTime.y);
+		if (!tutorialScript.completedTutorial && tutorialSpawn) {
+			spawnTimer = Random.Range (tutorialSpawnTime.x, tutorialSpawnTime.y);
+		} else {
+			spawnTimer = Random.Range (spawnTime.x, spawnTime.y);
+		}
 	}
 }
