@@ -72,7 +72,7 @@ public class Oven : MonoBehaviour {
 		if (tutorial.tutorialProgression == 6) {
 			tutorial.progressTutorial();
 		}
-        if (tutorial.tutorialProgression == 17) {
+        if (tutorial.tutorialProgression == 13) {
             Debug.Log(tutorial.tutorialOrdersCompleted + "/2 test orders completed");
             tutorial.progressTutorial();
         }
