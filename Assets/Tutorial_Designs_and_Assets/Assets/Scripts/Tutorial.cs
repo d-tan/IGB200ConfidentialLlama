@@ -58,7 +58,7 @@ public class Tutorial : MonoBehaviour {
         if (completedTutorial == false) {
             //Set the level of tutorial progression to the very beginning
             tutorialProgression = 1;
-            tutorialProgression = 16; //Debug Move
+            //tutorialProgression = 16; //Debug Move
         } else {
             //Set the level of tutorial progression to the end to skip the tutorial
             tutorialProgression = 19;
@@ -74,7 +74,7 @@ public class Tutorial : MonoBehaviour {
             player01ResponseText.text = "Cool.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 2){
-            player01Text.text = "So the first step is to make food. Ah, here comes an order!";
+            player01Text.text = "So the first step is to make food. Ah, here comes two orders!";
             player02Text.text = player01Text.text;
             while (ordersSpawned != 2) {
                 orders.CreateOrder(cheesePizza);
@@ -107,7 +107,7 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;*/
 
-            player01Text.text = "You can flick the ingredients around to move them. Every pizza starts with the base, that's what you put ingredients on.";
+            player01Text.text = "You can flick the ingredients around to move them. Every pizza needs a type of sauce, for these, use Tomato Sauce, drag it onto a pizza base to combine then.";
             player02Text.text = player01Text.text;
 
             if (plate.CheckContainsIngredient(IngredientID.Sauce)) {
@@ -131,7 +131,7 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 6) {
-            player01Text.text = "Nice, one pizza. Unforunately we can't just send that off, people who eat cold pizzas are just weird. Flick the pizza into the side of the oven.";
+            player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick the pizza into the side of the oven.";
             player02Text.text = player01Text.text;
 
             P1Response.SetActive(false);
@@ -139,7 +139,7 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 7) {
-            player01Text.text = "Now the pizza goes into the oven and is cooked. If you had other orders you could be doing them right now. But for now, we wait.";
+            player01Text.text = "Now the pizza is cooked. If you had other orders you could be doing them right now. But for now, we wait.";
             player02Text.text = player01Text.text;
 
             player01ResponseText.text = "Ok.";
@@ -157,7 +157,7 @@ public class Tutorial : MonoBehaviour {
             player01ResponseText.text = "Nothing! What's next?";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 10) {
-            player01Text.text = "Obstructions! Every workplace has problems. We'll get through these quickly because you're probably sick of listening to me.";
+            player01Text.text = "Pizza Boys and Girls, we don't discriminate between gender here. We'll get through this quickly because you're probably sick of listening to me.";
             player02Text.text = player01Text.text;
 
             player01ResponseText.text = "What!? Not at all...";
@@ -167,40 +167,17 @@ public class Tutorial : MonoBehaviour {
             player02Text.text = player01Text.text;
 
             //START THE WAITERS WALKING
+            //waitersActive = true     <---- An example of what I essentially want to do
 
             player01ResponseText.text = "And I get paid now right?";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 12) {
-            player01Text.text = "You get points, yes. Next, gotta teach you what to do in case of a fire, how to put it out!";
-            player02Text.text = player01Text.text;
-
-            player01ResponseText.text = "Can't we call the fire department?";
-            player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 13) {
-            player01Text.text = "No, draws too much attention. For fires, drag the fire extinguisher to the fire to put it out.";
-            player02Text.text = player01Text.text;
-
-            player01ResponseText.text = "Gotcha!";
-            player02ResponseText.text = player02ResponseText.text;
-        } else if (tutorialProgression == 14) {
-            player01Text.text = "Don't worry about your food too, it doesn't burn the pizza strangely...";
-            player02Text.text = player01Text.text;
-
-            player01ResponseText.text = "Ok... Cool!";
-            player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 15) {
-            player01Text.text = "Better get to it!";
-            player02Text.text = player01Text.text;
-
-            player01ResponseText.text = "<TRIGGER PROGRESS>";
-            player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 16) {
-            player01Text.text = "And that's it. Last thing, try not to hit people with the food, it's a waste and you'll have to make it again... It's also rude.";
+            player01Text.text = "Yep. Last thing though, try not to hit people with the food, it's a waste and you'll have to make it again... It's also rude.";
             player02Text.text = player01Text.text;
 
             player01ResponseText.text = "Ok.";
             player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 17) {
+        } else if (tutorialProgression == 13) {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
 
@@ -220,13 +197,13 @@ public class Tutorial : MonoBehaviour {
             P2Response.SetActive(false);
             //player01ResponseText.text = "Let's do this!";
             //player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 18) {
+        } else if (tutorialProgression == 14) {
             player01Text.text = "Very well done, you should feel proud of yourselves. The food is excellent.";
             player02Text.text = player01Text.text;
 
             player01ResponseText.text = "Thanks!";
             player02ResponseText.text = player01ResponseText.text;
-        } else if (tutorialProgression == 19) {
+        } else if (tutorialProgression == 15) {
             player01Text.text = "I think you're ready to go for real. What do you two say? You can say no and we'll do it again.";
             player02Text.text = player01Text.text;
 
@@ -237,7 +214,7 @@ public class Tutorial : MonoBehaviour {
             P2EndOptionYText.text = P1EndOptionYText.text;
             P1EndOptionNText.text = "Can you tell me again?";
             P2EndOptionNText.text = P1EndOptionNText.text;
-        } else if (tutorialProgression == 20) {
+        } else if (tutorialProgression == 16) {
             P1Tutorial.SetActive(false);
             P2Tutorial.SetActive(false);
 
@@ -254,26 +231,26 @@ public class Tutorial : MonoBehaviour {
 
             completedTutorial = true;
             tutorialProgression++;
-        } else if (tutorialProgression < 1 || tutorialProgression > 20){
+        } else if (tutorialProgression < 1 || tutorialProgression > 16){
             print("Tutorial Error: tutorialProgression is not >= 1 and <= 21.");
         }
     }
 
     public void progressTutorial() {
-        if (tutorialProgression == 16) {
+        if (tutorialProgression == 13) {
             timeBeforeBoxHide = Time.timeSinceLevelLoad + 10.0f;
         }
-        if (tutorialProgression == 17) {
+        if (tutorialProgression == 14) {
             P1Tutorial.SetActive(true);
             P2Tutorial.SetActive(true);
         }
-        if (tutorialProgression == 18) {
+        if (tutorialProgression == 15) {
             P1EndOptionY.SetActive(true);
             P1EndOptionN.SetActive(true);
             P2EndOptionY.SetActive(true);
             P2EndOptionN.SetActive(true);
         }
-        if (tutorialProgression != 20) {
+        if (tutorialProgression != 16) {
             tutorialProgression++;
             
         }
