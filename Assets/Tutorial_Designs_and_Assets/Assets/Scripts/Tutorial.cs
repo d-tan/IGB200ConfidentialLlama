@@ -205,6 +205,9 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Very well done, you should feel proud of yourselves. The food is excellent.";
             player02Text.text = player01Text.text;
 
+            P1Tutorial.SetActive(true);
+            P2Tutorial.SetActive(true);
+
             player01ResponseText.text = "Thanks!";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 15) {
