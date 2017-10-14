@@ -196,6 +196,9 @@ public class Tutorial : MonoBehaviour {
                 P1Tutorial.SetActive(false);
                 P2Tutorial.SetActive(false);
             }
+            if (tutorialOrdersCompleted == 2) {
+                progressTutorial();
+            }
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
@@ -219,6 +222,11 @@ public class Tutorial : MonoBehaviour {
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
+
+            P1EndOptionY.SetActive(true);
+            P1EndOptionN.SetActive(true);
+            P2EndOptionY.SetActive(true);
+            P2EndOptionN.SetActive(true);
 
             P1EndOptionYText.text = "I'm ready!!";
             P2EndOptionYText.text = P1EndOptionYText.text;
