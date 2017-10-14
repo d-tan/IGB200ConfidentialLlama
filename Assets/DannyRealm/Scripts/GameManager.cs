@@ -11,9 +11,6 @@ public class GameManager : MonoBehaviour {
 
 	void Start() {
 		orderManager = GetComponent<OrderManager> ();
-
-
-		TutorialBegin ();
 	}
 
 	public void TutorialBegin() {

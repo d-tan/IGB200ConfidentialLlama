@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4374901, g: 0.48531127, b: 0.56558615, a: 1}
+  m_IndirectSpecularColor: {r: 0.4374895, g: 0.4853106, b: 0.56558496, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1154,6 +1154,7 @@ MonoBehaviour:
   voteToProgress: 0
   waitersSpawned: 0
   ordersSpawned: 0
+  tutorialTestOrdersCompleted: 0
   tutorialOrdersCompleted: 0
   timeBeforeBoxHide: 0
   player01Text: {fileID: 1147104798}
@@ -2685,8 +2686,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9756498, y: 1.1032007, z: 1.0751398}
-  m_Center: {x: 0.017189406, y: 0.05160043, z: -0.5266275}
+  m_Size: {x: 0.9756498, y: 1.1032007, z: 0.8365084}
+  m_Center: {x: 0.017189408, y: 0.05160043, z: -0.70028734}
 --- !u!33 &1352677311
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4103,7 +4104,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.3
+      value: -3.06
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4131,15 +4132,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 564ab3b975f9aaa4eaea6211a6cf46db, type: 3}
       propertyPath: m_TagString

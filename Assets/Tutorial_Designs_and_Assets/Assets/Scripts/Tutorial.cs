@@ -50,6 +50,7 @@ public class Tutorial : MonoBehaviour {
     OrderReceiver p1Receiver;
     OrderReceiver p2Receiver;
     WaiterManager waiters;
+	GameManager gameManager;
     public Plate plate;
 
     // Use this for initialization
@@ -58,11 +59,14 @@ public class Tutorial : MonoBehaviour {
         p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
         p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
         waiters = GameManager.GetComponent<WaiterManager>();
+		gameManager = GetComponent<GameManager> ();
 
         if (completedTutorial == false) {
             //Set the level of tutorial progression to the very beginning
             tutorialProgression = 1;
             //tutorialProgression = 16; //Debug Move
+			gameManager.TutorialBegin ();
+
         } else {
             //Set the level of tutorial progression to the end to skip the tutorial
             tutorialProgression = 19;
@@ -241,6 +245,7 @@ public class Tutorial : MonoBehaviour {
             P2EndOptionN.SetActive(false);
 
             completedTutorial = true;
+			gameManager.TutorialEnded ();
             tutorialProgression++;
         }
         if (tutorialProgression >= 11 && tutorialProgression <= 16) {

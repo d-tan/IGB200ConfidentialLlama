@@ -88,7 +88,7 @@ public class Throwable : MonoBehaviour {
 		if (!beingHeld && col.transform.CompareTag ("Wall")) {
 			side = 0;
 			Debug.Log ("Hit a wall");
-		} else if (col.transform.CompareTag("Waiter")) {
+		} else if (!this.CompareTag("Order") && col.transform.CompareTag("Waiter")) {
 			Debug.Log ("Hit waiter");
 			Destroy (this.gameObject);
 		}
