@@ -142,6 +142,8 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Now the pizza is cooked. If you had other orders you could be doing them right now. But for now, we wait.";
             player02Text.text = player01Text.text;
 
+            P1Response.SetActive(true);
+            P2Response.SetActive(true);
             player01ResponseText.text = "Ok.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 8) {
