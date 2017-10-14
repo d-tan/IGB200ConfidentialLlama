@@ -311,6 +311,11 @@ public class Tutorial : MonoBehaviour {
             P2EndOptionY.SetActive(false);
             P2EndOptionN.SetActive(false);
 
+            waitersSpawned = 0;
+            ordersSpawned = 0;
+            tutorialOrdersCompleted = 0;
+            timeBeforeBoxHide = 0;
+
             tutorialProgression = 1;
         }
     }
