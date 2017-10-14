@@ -27,6 +27,7 @@ public class Tutorial : MonoBehaviour {
 
     public int tutorialProgression = 1;
     public int voteToProgress = 0;
+    public int waitersSpawned = 0;
     public int ordersSpawned = 0;
     public int tutorialOrdersCompleted = 0;
     public float timeBeforeBoxHide = 0;
@@ -47,6 +48,7 @@ public class Tutorial : MonoBehaviour {
     OrderManager orders;
     OrderReceiver p1Receiver;
     OrderReceiver p2Receiver;
+    WaiterManager waiters;
     public Plate plate;
 
     // Use this for initialization
@@ -54,6 +56,7 @@ public class Tutorial : MonoBehaviour {
         orders = GameManager.GetComponent<OrderManager>();
         p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
         p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
+        waiters = GameManager.GetComponent<WaiterManager>();
 
         if (completedTutorial == false) {
             //Set the level of tutorial progression to the very beginning
@@ -168,9 +171,6 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Right... So these are our pizza boys and girls, they work here. They'll deliver the boxed pizza for you.";
             player02Text.text = player01Text.text;
 
-            //START THE WAITERS WALKING
-            //waitersActive = true     <---- An example of what I essentially want to do
-
             player01ResponseText.text = "And I get paid now right?";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 12) {
@@ -185,7 +185,7 @@ public class Tutorial : MonoBehaviour {
 
 //            Debug.Log (Time.timeSinceLevelLoad);
 
-            while (ordersSpawned < 2) {
+            while (ordersSpawned < 4) {
                 orders.CreateOrder(cheesePizza);
                 orders.CreateOrder(cheesePizza);
                 ordersSpawned += 2;
@@ -235,6 +235,12 @@ public class Tutorial : MonoBehaviour {
             tutorialProgression++;
         } else if (tutorialProgression < 1 || tutorialProgression > 16){
             print("Tutorial Error: tutorialProgression is not >= 1 and <= 21.");
+        }
+        if (tutorialProgression >= 11 && tutorialProgression <= 16) {
+            while (waitersSpawned < 4) {
+                waiters.SpawnWaiter();
+                waitersSpawned += 1;
+            }
         }
     }
 
