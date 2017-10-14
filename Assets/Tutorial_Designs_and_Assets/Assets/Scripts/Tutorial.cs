@@ -29,6 +29,7 @@ public class Tutorial : MonoBehaviour {
     public int voteToProgress = 0;
     public int waitersSpawned = 0;
     public int ordersSpawned = 0;
+    public int tutorialTestOrdersCompleted = 0;
     public int tutorialOrdersCompleted = 0;
     public float timeBeforeBoxHide = 0;
 
@@ -98,18 +99,6 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 4) {
-            /*player01Text.text = "It doesn't matter what order you make the pizza in, we'll get the idea. Drag the pizza base to a plate, if you don't have it, ask your friend to flick it to you.";
-            player02Text.text = player01Text.text;
-
-            if (plate.CheckContainsIngredient(IngredientID.PizzaBase)) {
-                progressTutorial();
-            }
-
-            P1Response.SetActive(false);
-            P2Response.SetActive(false);
-            //player01ResponseText.text = "<TRIGGER PROGRESS>";
-            //player02ResponseText.text = player01ResponseText.text;*/
-
             player01Text.text = "You can flick the ingredients around to move them. Every pizza needs a type of sauce, for these, use Tomato Sauce, drag it onto a pizza base to combine then.";
             player02Text.text = player01Text.text;
 
@@ -136,6 +125,10 @@ public class Tutorial : MonoBehaviour {
         } else if (tutorialProgression == 6) {
             player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick the pizza into the side of the oven.";
             player02Text.text = player01Text.text;
+
+            if (tutorialOrdersCompleted == 2) {
+                progressTutorial();
+            }
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
@@ -196,7 +189,7 @@ public class Tutorial : MonoBehaviour {
                 P1Tutorial.SetActive(false);
                 P2Tutorial.SetActive(false);
             }
-            if (tutorialOrdersCompleted == 2) {
+            if (tutorialTestOrdersCompleted == 2) {
                 progressTutorial();
             }
 
@@ -249,8 +242,6 @@ public class Tutorial : MonoBehaviour {
 
             completedTutorial = true;
             tutorialProgression++;
-        } else if (tutorialProgression < 1 || tutorialProgression > 16){
-            print("Tutorial Error: tutorialProgression is not >= 1 and <= 21.");
         }
         if (tutorialProgression >= 11 && tutorialProgression <= 16) {
             while (waitersSpawned < 4) {
@@ -311,8 +302,10 @@ public class Tutorial : MonoBehaviour {
             P2EndOptionY.SetActive(false);
             P2EndOptionN.SetActive(false);
 
+            waiters.tutorialSpawn = false;
             waitersSpawned = 0;
             ordersSpawned = 0;
+            tutorialTestOrdersCompleted = 0;
             tutorialOrdersCompleted = 0;
             timeBeforeBoxHide = 0;
 
