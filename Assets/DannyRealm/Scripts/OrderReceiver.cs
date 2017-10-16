@@ -22,6 +22,9 @@ public class OrderReceiver : MonoBehaviour {
 	public void OrderCompleted() {
 		Destroy (currentOrder.gameObject);
 		currentOrder = null;
+		for (int i = 0; i < ingredientSprite.Length; i++) {
+			ingredientSprite [i].sprite = sprites [0];
+		}
 	}
 
 	void InitialiseOrder() {
