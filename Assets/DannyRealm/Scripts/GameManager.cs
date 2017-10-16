@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
 	// Managers
 	OrderManager orderManager;
+	public TimerScript timeManager;
 
 	void Start() {
 		orderManager = GetComponent<OrderManager> ();
@@ -23,5 +24,7 @@ public class GameManager : MonoBehaviour {
 		for (int i = 0; i < piles.Length; i++) {
 			piles [i].ToggleDisplayObjects (true);
 		}
+
+		timeManager.StartTimer ();
 	}
 }

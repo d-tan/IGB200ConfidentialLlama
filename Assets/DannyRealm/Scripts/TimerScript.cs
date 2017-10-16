@@ -10,6 +10,10 @@ public class TimerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
+	}
+
+	public void StartTimer() {
 		SetGameTime ();
 		InvokeRepeating ("IncrementCounter", 1.0f, 1.0f);
 	}
