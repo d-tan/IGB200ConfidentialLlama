@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderReceiver : MonoBehaviour {
 
 	public Order currentOrder;
+	public GameObject orderUI;
+	public Image[] ingredientSprite = new Image[4];
+	public Sprite[] sprites = new Sprite[6];
 	Vector3 parentPos;
 
 	Dictionary<Collider, Order> colliding = new Dictionary<Collider, Order>();
@@ -12,6 +16,7 @@ public class OrderReceiver : MonoBehaviour {
 
 	void Start() {
 		parentPos = transform.parent.position;
+		parentPos.y += 0.05f;
 	}
 
 	public void OrderCompleted() {
@@ -26,6 +31,16 @@ public class OrderReceiver : MonoBehaviour {
 			currentOrder.myCollider.enabled = false;
 
 			OrderManager.RemoveOrder (currentOrder);
+
+			// Display Recipe
+			for (int i = 0; i < ingredientSprite.Length; i++) {
+				for (int j = 0; j < sprites.Length; j++) {
+					if (currentOrder.ingredients[i].ToString() == sprites[j].name) {
+						ingredientSprite [i].sprite = sprites [j];
+					}
+				}
+			}
+
 		}
 	}
 
