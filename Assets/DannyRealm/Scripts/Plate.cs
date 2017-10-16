@@ -17,9 +17,14 @@ public class Plate : MonoBehaviour {
 	public Throwable throwScript;
 	float colliderHeight = 0f;
 
+	// Ingredients
 	const int numOfIngredients = 4;
 	public Ingredient[] ingredients = new Ingredient[numOfIngredients];
 //	public Transform[] positions = new Transform[numOfIngredients];
+	public GameObject topping;
+	Vector3 toppingOffset = new Vector3(0, 0.12f, 0);
+	Vector3 toppingSpacing = new Vector3 (0, 0.01f, 0);
+	int currentToppingLayer = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +35,7 @@ public class Plate : MonoBehaviour {
 	}
 
 	public void IngredientTrigger(Ingredient script) {
+		IngredientID id = IngredientID.None;
 
 		if (CheckContainsIngredient (script.ingredientID))
 			return;
@@ -48,10 +54,29 @@ public class Plate : MonoBehaviour {
 
 				script.transform.localPosition += new Vector3(0, 0.1f * i, 0);
 
+				script.gameObject.SetActive (false);
+
+				id = script.ingredientID;
+
 				break;
 			}
 		}
 
+		if (id == IngredientID.Sauce) {
+			SpawnTopping (toppingOffset, id);
+		} else if (id == IngredientID.Cheese) {
+			SpawnTopping (toppingOffset + toppingSpacing, id);
+		} else {
+			SpawnTopping (toppingOffset + (toppingSpacing * currentToppingLayer), id);
+			currentToppingLayer++;
+		}
+	}
+
+	void SpawnTopping(Vector3 relativePos, IngredientID id) {
+		GameObject newTopping = Instantiate (topping, transform);
+		Debug.Log (newTopping.transform.position + " " + relativePos);
+		newTopping.transform.localPosition = relativePos;
+		newTopping.GetComponent<Topping> ().AssignMaterial (id);
 	}
 
 	public bool CheckIfFull() {
