@@ -42,7 +42,7 @@ public class PileOf : MonoBehaviour {
 	}
 
 	void SpawnItem() {
-		spawnedObject = Instantiate (item, transform.position, Quaternion.identity) as GameObject;
+		spawnedObject = Instantiate (item, transform.position, item.transform.rotation) as GameObject;
 		currentObject = spawnedObject.GetComponent<Throwable> ();
 
 		// Tutorial only
