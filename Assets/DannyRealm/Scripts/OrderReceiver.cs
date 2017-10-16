@@ -28,6 +28,7 @@ public class OrderReceiver : MonoBehaviour {
 		if (currentOrder) {
 			currentOrder.rb.velocity = new Vector3 (0, 0, 0);
 			currentOrder.transform.position = parentPos;
+			Debug.Log (parentPos);
 			currentOrder.myCollider.enabled = false;
 
 			OrderManager.RemoveOrder (currentOrder);
