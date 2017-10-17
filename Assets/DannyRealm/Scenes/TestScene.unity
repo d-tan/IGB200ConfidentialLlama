@@ -3870,7 +3870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1407212711}
-  gametime: 3
+  gametime: 180
   endScreen: {fileID: 809386093}
 --- !u!114 &1407212711
 MonoBehaviour:
