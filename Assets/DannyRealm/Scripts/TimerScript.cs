@@ -8,9 +8,11 @@ public class TimerScript : MonoBehaviour {
 	public Text timerText;
 	public float gametime = 300.0f;
 
+	public GameObject endScreen;
+
 	// Use this for initialization
 	void Start () {
-		
+//		endScreen.SetActive (false);
 	}
 
 	public void StartTimer() {
@@ -34,6 +36,7 @@ public class TimerScript : MonoBehaviour {
 	void Update () {
 		if(gametime <= 0.0f) { // When time runs out...
 			// Show score screen
+			endScreen.SetActive (true);
 		}
 	}
 }
