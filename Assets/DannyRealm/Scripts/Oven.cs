@@ -71,6 +71,7 @@ public class Oven : MonoBehaviour {
 	}
 
 	void OrderCompletedActions() {
+		Debug.Log ("ingredients: " + numOfMatches);
 		scoreManager.AwardPoints (numOfMatches);
 		TutorialProgress ();
 		OrderManager.numOrders--;
@@ -116,8 +117,6 @@ public class Oven : MonoBehaviour {
 		IngredientID id;
 		bool noMatch = true;
 		bool[] checkList = new bool[pizza.Length];
-
-		numOfMatches = 0; // Count how many ingredients there are
 
 		for (int i = 0; i < checkList.Length; i++) {
 			checkList [i] = false;

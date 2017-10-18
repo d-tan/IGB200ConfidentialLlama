@@ -74,7 +74,7 @@ public class Plate : MonoBehaviour {
 
 	void SpawnTopping(Vector3 relativePos, IngredientID id) {
 		GameObject newTopping = Instantiate (topping, transform);
-		Debug.Log (newTopping.transform.position + " " + relativePos);
+//		Debug.Log (newTopping.transform.position + " " + relativePos);
 		newTopping.transform.localPosition = relativePos;
 		newTopping.GetComponent<Topping> ().AssignMaterial (id);
 	}

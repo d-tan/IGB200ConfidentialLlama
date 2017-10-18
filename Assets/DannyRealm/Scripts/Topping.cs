@@ -10,7 +10,7 @@ public class Topping : MonoBehaviour {
 
 	void Start() {
 //		meshRenderer = GetComponent<MeshRenderer> ();
-		Debug.Log (meshRenderer);
+//		Debug.Log (meshRenderer);
 	}
 
 	public void AssignMaterial(IngredientID ingredient) {
