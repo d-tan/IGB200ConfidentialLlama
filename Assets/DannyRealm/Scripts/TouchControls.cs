@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TouchControls : MonoBehaviour {
 
+	[HideInInspector]
 	public bool mouseControl = false;
 
 	// Touch

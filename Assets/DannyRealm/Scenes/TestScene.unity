@@ -1481,7 +1481,7 @@ MonoBehaviour:
   P2EndOptionNText: {fileID: 449355246}
   player01ResponseText: {fileID: 131616616}
   player02ResponseText: {fileID: 769271580}
-  completedTutorial: 1
+  completedTutorial: 0
   plate: {fileID: 0}
 --- !u!114 &512653441
 MonoBehaviour:
