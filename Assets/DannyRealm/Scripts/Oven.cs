@@ -6,6 +6,7 @@ public class Oven : MonoBehaviour {
 
 	public OrderReceiver rightOrder;
 	public OrderReceiver leftOrder;
+	int numOfMatches = 0;
 
 	ScoreManager scoreManager;
     Tutorial tutorial;
@@ -30,12 +31,15 @@ public class Oven : MonoBehaviour {
 
 	public void InputCollider(Plate plateScript) {
 		IngredientID[] pizzaIngredients = new IngredientID[plateScript.ingredients.Length];
+		numOfMatches = 0;
 
 		for (int i = 0; i < pizzaIngredients.Length; i++) {
-			if (plateScript.ingredients [i])
+			if (plateScript.ingredients [i]) {
 				pizzaIngredients [i] = plateScript.ingredients [i].ingredientID;
-			else
+				numOfMatches++;
+			} else {
 				pizzaIngredients [i] = IngredientID.None;
+			}
 		}
 
 		int side = CheckPizza (pizzaIngredients);
@@ -49,20 +53,27 @@ public class Oven : MonoBehaviour {
 		if (side > 0) {
 			// Right side
 			Debug.Log("Recipe Right");
-			scoreManager.AwardPoints ();
+			OrderCompletedActions ();
 			rightOrder.OrderCompleted ();
-            TutorialProgress ();
+            
+
 
         } else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
-			scoreManager.AwardPoints ();
+			OrderCompletedActions ();
 			leftOrder.OrderCompleted ();
-			TutorialProgress ();
+
 
         } else {
 			Debug.Log ("No Match");
 		}
+	}
+
+	void OrderCompletedActions() {
+		scoreManager.AwardPoints (numOfMatches);
+		TutorialProgress ();
+		OrderManager.numOrders--;
 	}
 
 	void TutorialProgress() {
@@ -105,6 +116,8 @@ public class Oven : MonoBehaviour {
 		IngredientID id;
 		bool noMatch = true;
 		bool[] checkList = new bool[pizza.Length];
+
+		numOfMatches = 0; // Count how many ingredients there are
 
 		for (int i = 0; i < checkList.Length; i++) {
 			checkList [i] = false;

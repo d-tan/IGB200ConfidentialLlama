@@ -11,6 +11,7 @@ public class PileOf : MonoBehaviour {
 
 	Throwable currentObject;
 	bool isPlate = false;
+	public bool hideIngredient = true;
 
 	// Tutorial stuff
 	[Header("Tutorial Stuff")]
@@ -50,7 +51,7 @@ public class PileOf : MonoBehaviour {
 			tutorialScript.plate = spawnedObject.GetComponent<Plate> ();
 		}
 
-		if (tutorialScript.completedTutorial) {
+		if (hideIngredient && tutorialScript.completedTutorial) {
 			currentObject.ToggleRender (false);
 		}
 

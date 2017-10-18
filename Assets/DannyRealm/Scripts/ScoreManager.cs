@@ -22,15 +22,15 @@ public class ScoreManager : MonoBehaviour {
 
 		// DEBUG
 		if (Input.GetKeyDown ("i") && debug == true) {
-			AwardPoints ();
+			AwardPoints (1);
 		}
 
 	}
 
 
 	// Increase value of score upon obtaining points
-	public void AwardPoints() {
-		scoreValue += scoreBase;
+	public void AwardPoints(int numOfIngredients) {
+		scoreValue += scoreBase * numOfIngredients;
 		scoreText.text = scoreValue.ToString();
 	}
 

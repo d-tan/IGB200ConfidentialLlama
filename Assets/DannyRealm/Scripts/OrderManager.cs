@@ -16,14 +16,18 @@ public class OrderManager : MonoBehaviour {
 	[Header("Conveyor Belt")]
 	public bool moveOrders = true;
 	float orderSpacing = 1f;
-	float beltSpeed = 3.0f;
+	float beltSpeed = 5.0f;
+	[HideInInspector]
+	public static int numOrders = 0;
+	const int maxOrders = 10;
+
 	static List<Order> ordersList = new List<Order>();
 	static List<Vector3> virtualPos = new List<Vector3>();
 
 	// Order generation
 	[Header("Order generation")]
 	Tutorial tutorialScript;
-	float spawnTime = 10f;
+	float spawnTime = 7f;
 	float timerVariation = 2f;
 	float spawnTimer = 0f;
 
@@ -69,6 +73,7 @@ public class OrderManager : MonoBehaviour {
 
 		script.ingredients = RandomiseOrderIngredients ();
 
+		numOrders++;
 	}
 
 	/// <summary>
@@ -88,6 +93,8 @@ public class OrderManager : MonoBehaviour {
 		for (int i = 0; i < ingredients.Length; i++) {
 			script.ingredients [i] = ingredients [i];
 		}
+
+		numOrders++;
 	}
 
 	IngredientID[] RandomiseOrderIngredients(int arrayLength = 4) {
@@ -129,7 +136,8 @@ public class OrderManager : MonoBehaviour {
 	}
 
 	void OrderSpawner() {
-		spawnTimer -= Time.deltaTime;
+		if (numOrders < maxOrders)
+			spawnTimer -= Time.deltaTime;
 
 		if (spawnTimer <= 0) {
 			spawnTimer = Random.Range (spawnTime - timerVariation, spawnTime + timerVariation);
