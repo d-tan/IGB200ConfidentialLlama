@@ -82,9 +82,9 @@ public class Tutorial : MonoBehaviour {
             player01ResponseText.text = "Cool.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 2){
-            player01Text.text = "So the first step is to make food. Ah, here comes two orders!";
+            player01Text.text = "So the first step is to make food, you two will be working together on this. Ah, here comes an orders!";
             player02Text.text = player01Text.text;
-            while (ordersSpawned != 2) {
+            while (ordersSpawned != 1) {
                 orders.CreateOrder(cheesePizza);
                 ordersSpawned++;
             }
@@ -130,7 +130,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick the pizza into the side of the oven.";
             player02Text.text = player01Text.text;
 
-            if (tutorialOrdersCompleted == 2) {
+            if (tutorialOrdersCompleted == 1) {
                 progressTutorial();
             }
 

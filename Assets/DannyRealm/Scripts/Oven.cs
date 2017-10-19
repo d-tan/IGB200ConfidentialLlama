@@ -47,9 +47,9 @@ public class Oven : MonoBehaviour {
 		CompleteOrder (side);
 		// Start timers
 		Destroy(plateScript.gameObject);
-	}
+    }
 
-	void CompleteOrder(int side) {
+    void CompleteOrder(int side) {
 		if (side > 0) {
 			// Right side
 			Debug.Log("Recipe Right");
