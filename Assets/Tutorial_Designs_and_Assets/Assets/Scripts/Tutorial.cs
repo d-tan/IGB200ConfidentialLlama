@@ -103,7 +103,7 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 4) {
-            player01Text.text = "You can flick the ingredients around to move them. Every pizza needs a type of sauce, for these, use Tomato Sauce, drag it onto a pizza base to combine then.";
+            player01Text.text = "You can flick the ingredients around to share them between players. Every pizza needs a type of sauce, for these, use Pizza Sauce, drag it onto a pizza base to combine then.";
             player02Text.text = player01Text.text;
 
             if (plate.CheckContainsIngredient(IngredientID.Sauce)) {
@@ -127,7 +127,7 @@ public class Tutorial : MonoBehaviour {
             //player01ResponseText.text = "<TRIGGER PROGRESS>";
             //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 6) {
-            player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick the pizza into the side of the oven.";
+            player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick or drag the pizza into the side of the oven.";
             player02Text.text = player01Text.text;
 
             if (tutorialOrdersCompleted == 1) {
@@ -165,12 +165,12 @@ public class Tutorial : MonoBehaviour {
             player01ResponseText.text = "What!? Not at all...";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 11) {
-            player01Text.text = "Right... So these are our pizza boys and girls, they work here. They'll deliver the boxed pizza for you.";
+            player01Text.text = "Right... So these are our pizza boys and girls, they work here. They'll deliver the boxed pizza for you. They don't stop moving, we've given them roller scates to get around quicker.";
             player02Text.text = player01Text.text;
 
             waiters.tutorialSpawn = true;
 
-            player01ResponseText.text = "And I get paid now right?";
+            player01ResponseText.text = "Cool, and I get paid now right?";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 12) {
             player01Text.text = "Yep. Last thing though, try not to hit people with the food, it's a waste and you'll have to make it again... It's also rude.";
