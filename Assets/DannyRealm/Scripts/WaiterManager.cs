@@ -8,7 +8,7 @@ public class WaiterManager : MonoBehaviour {
 	public Vector3 spawnPoint;
 
 	// Timer
-	public Vector2 spawnTime = new Vector2 (3, 9);
+	public Vector2 spawnTime = new Vector2 (3, 4);
 	public Vector2 tutorialSpawnTime = new Vector2 (3, 4);
 	float spawnTimer = 0f;
 

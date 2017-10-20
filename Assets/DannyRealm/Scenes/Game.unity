@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43749022, g: 0.48531085, b: 0.56558514, a: 1}
+  m_IndirectSpecularColor: {r: 0.4374901, g: 0.48531127, b: 0.56558615, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 32128192}
   m_Layer: 5
   m_Name: player02EndButton(Yes)
-  m_TagString: EndTutorialButtons
+  m_TagString: StartTutorial&EndTutorialButtons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,7 +256,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 512653435}
   selfButton: {fileID: 32128187}
+  counterButton: {fileID: 183420352}
   voteToProgress: 0
+  skipTutorial: 0
 --- !u!1 &115739005
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +625,7 @@ GameObject:
   - component: {fileID: 183420357}
   m_Layer: 5
   m_Name: player02EndButton(No)
-  m_TagString: RedoTutorialButtons
+  m_TagString: SkipTutorial&RedoTutorialButtons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -745,7 +747,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 512653435}
   selfButton: {fileID: 183420352}
+  counterButton: {fileID: 32128187}
   voteToProgress: 0
+  skipTutorial: 0
 --- !u!1 &233412987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,7 +1826,7 @@ MonoBehaviour:
   waiterObject: {fileID: 1464266621080082, guid: 5c7c562c08aa446bf90914cf9cf0b20f,
     type: 2}
   spawnPoint: {x: -3.5, y: 0, z: -15}
-  spawnTime: {x: 5.5, y: 15}
+  spawnTime: {x: 3, y: 4}
   tutorialSpawnTime: {x: 3, y: 4}
   tutorialSpawn: 0
 --- !u!1 &515609696
@@ -10439,7 +10443,7 @@ GameObject:
   - component: {fileID: 1997449234}
   m_Layer: 5
   m_Name: player01EndButton(Yes)
-  m_TagString: EndTutorialButtons
+  m_TagString: StartTutorial&EndTutorialButtons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10561,7 +10565,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 512653435}
   selfButton: {fileID: 1997449229}
+  counterButton: {fileID: 2105009160}
   voteToProgress: 0
+  skipTutorial: 0
 --- !u!1 &2001597425
 GameObject:
   m_ObjectHideFlags: 0
@@ -10650,7 +10656,7 @@ GameObject:
   - component: {fileID: 2105009165}
   m_Layer: 5
   m_Name: player01EndButton(No)
-  m_TagString: RedoTutorialButtons
+  m_TagString: SkipTutorial&RedoTutorialButtons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10772,7 +10778,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 512653435}
   selfButton: {fileID: 2105009160}
+  counterButton: {fileID: 1997449229}
   voteToProgress: 0
+  skipTutorial: 0
 --- !u!1 &2120892359
 GameObject:
   m_ObjectHideFlags: 0

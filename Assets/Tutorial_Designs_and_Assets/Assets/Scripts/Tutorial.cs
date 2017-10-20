@@ -59,23 +59,32 @@ public class Tutorial : MonoBehaviour {
         p1Receiver = P1OrderReciever.GetComponent<OrderReceiver>();
         p2Receiver = P2OrderReciever.GetComponent<OrderReceiver>();
         waiters = GameManager.GetComponent<WaiterManager>();
-		gameManager = GetComponent<GameManager> ();
+        gameManager = GetComponent<GameManager> ();
 
         if (completedTutorial == false) {
             //Set the level of tutorial progression to the very beginning
-            tutorialProgression = 1;
+            tutorialProgression = 0;
             //tutorialProgression = 16; //Debug Move
 			gameManager.TutorialBegin ();
+            Activate();
 
         } else {
             //Set the level of tutorial progression to the end to skip the tutorial
-            tutorialProgression = 19;
+            tutorialProgression = 16;
         }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (tutorialProgression == 1) {
+        if (tutorialProgression == 0) {
+            player01Text.text = "Would you two like me to teach you the ropes of Pizza Flick? Or would you rather go straight to the action?";
+            player02Text.text = player01Text.text;
+
+            P1EndOptionYText.text = "Teach me! (Tutorial)";
+            P2EndOptionYText.text = P1EndOptionYText.text;
+            P1EndOptionNText.text = "We're good. (Skip Tutorial)";
+            P2EndOptionNText.text = P1EndOptionNText.text;
+        } else if (tutorialProgression == 1) {
             player01Text.text = "Welcome young chef to 'Flick Dish Pizzaria', the most lively pizzaria in the world.";
             player02Text.text = player01Text.text;
 
@@ -100,8 +109,6 @@ public class Tutorial : MonoBehaviour {
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
-            //player01ResponseText.text = "<TRIGGER PROGRESS>";
-            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 4) {
             player01Text.text = "You can flick the ingredients around to share them between players. Every pizza needs a type of sauce, for these, use Pizza Sauce, drag it onto a pizza base to combine then.";
             player02Text.text = player01Text.text;
@@ -110,8 +117,6 @@ public class Tutorial : MonoBehaviour {
                 progressTutorial();
             }
 
-            //P1Response.SetActive(false);
-            //P2Response.SetActive(false);
             player01ResponseText.text = "Gotcha!";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 5) {
@@ -124,8 +129,6 @@ public class Tutorial : MonoBehaviour {
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
-            //player01ResponseText.text = "<TRIGGER PROGRESS>";
-            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 6) {
             player01Text.text = "Nice. Unforunately we can't just send the pizzas off, people who eat cold pizzas are just weird. Flick or drag the pizza into the side of the oven.";
             player02Text.text = player01Text.text;
@@ -136,14 +139,10 @@ public class Tutorial : MonoBehaviour {
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
-            //player01ResponseText.text = "<TRIGGER PROGRESS>";
-            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 7) {
             player01Text.text = "Now the pizza is cooked. If you had other orders you could be doing them right now. But for now, we wait.";
             player02Text.text = player01Text.text;
 
-            P1Response.SetActive(true);
-            P2Response.SetActive(true);
             player01ResponseText.text = "Ok.";
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 8) {
@@ -182,8 +181,6 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
 
-//            Debug.Log (Time.timeSinceLevelLoad);
-
             while (ordersSpawned < 4) {
                 orders.CreateOrder(cheesePizza);
                 orders.CreateOrder(cheesePizza);
@@ -199,8 +196,6 @@ public class Tutorial : MonoBehaviour {
 
             P1Response.SetActive(false);
             P2Response.SetActive(false);
-            //player01ResponseText.text = "Let's do this!";
-            //player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 14) {
             player01Text.text = "Very well done, you should feel proud of yourselves. The food is excellent.";
             player02Text.text = player01Text.text;
@@ -215,15 +210,7 @@ public class Tutorial : MonoBehaviour {
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 15) {
             player01Text.text = "I think you're ready to go for real. What do you two say? You can say no and we'll do it again.";
-            player02Text.text = player01Text.text;
-
-            P1Response.SetActive(false);
-            P2Response.SetActive(false);
-
-            P1EndOptionY.SetActive(true);
-            P1EndOptionN.SetActive(true);
-            P2EndOptionY.SetActive(true);
-            P2EndOptionN.SetActive(true);
+            player02Text.text = player01Text.text;         
 
             P1EndOptionYText.text = "I'm ready!!";
             P2EndOptionYText.text = P1EndOptionYText.text;
@@ -260,31 +247,25 @@ public class Tutorial : MonoBehaviour {
         if (tutorialProgression == 13) {
             timeBeforeBoxHide = Time.timeSinceLevelLoad + 10.0f;
         }
+
         if (tutorialProgression == 14) {
-            P1Tutorial.SetActive(true);
-            P2Tutorial.SetActive(true);
+            Activate();
         }
+
         if (tutorialProgression == 15) {
-            P1EndOptionY.SetActive(true);
-            P1EndOptionN.SetActive(true);
-            P2EndOptionY.SetActive(true);
-            P2EndOptionN.SetActive(true);
+            Activate();
+
         }
+
         if (tutorialProgression != 16) {
             tutorialProgression++;
+            Activate();
             
         }
     }
 
     public void playerVote() {
         voteToProgress++;
-
-        //this.gameObject.SetActive(false);
-
-        /*if (this.gameObject.tag == "Player02Tutorial") {
-            P2Response.SetActive(false);
-            print("This object is part of the tutorial02");
-        }*/
 
         if (voteToProgress == 2) {
             progressTutorial();
@@ -295,7 +276,7 @@ public class Tutorial : MonoBehaviour {
             P2Response.SetActive(true);
         }
 
-        if (voteToProgress < 0) {
+        if (voteToProgress < -1) {
             voteToProgress = 0;
             print("Player Voted to Redo - Resetting");
 
@@ -315,6 +296,73 @@ public class Tutorial : MonoBehaviour {
             timeBeforeBoxHide = 0;
 
             tutorialProgression = 1;
+        }
+
+        if (voteToProgress > 150) {
+            voteToProgress = 0;
+            print("Players Voted to Skip - Skipping");
+
+            P1Response.SetActive(false);
+            P2Response.SetActive(false);
+
+            P1EndOptionY.SetActive(false);
+            P1EndOptionN.SetActive(false);
+            P2EndOptionY.SetActive(false);
+            P2EndOptionN.SetActive(false);
+
+            waiters.tutorialSpawn = false;
+            waitersSpawned = 0;
+            ordersSpawned = 0;
+            tutorialTestOrdersCompleted = 0;
+            tutorialOrdersCompleted = 0;
+            timeBeforeBoxHide = 0;
+            completedTutorial = true;
+
+            tutorialProgression = 16;
+        }
+
+        if (tutorialProgression == 0 && voteToProgress > 101) {
+            progressTutorial();
+            voteToProgress = 0;
+            print("Players Voted differently - Progressing");
+
+            P1Response.SetActive(true);
+            P2Response.SetActive(true);
+        }
+    }
+
+    public void Activate() {
+        if (tutorialProgression == 0 || tutorialProgression == 15) {
+            if (P1Response.activeInHierarchy == true || P2Response.activeInHierarchy == true) {
+                P1Response.SetActive(false);
+                P2Response.SetActive(false);
+            }
+
+            if (P1EndOptionY.activeInHierarchy == false || P1EndOptionN.activeInHierarchy == false) {
+                P1EndOptionY.SetActive(true);
+                P1EndOptionN.SetActive(true);
+            }
+
+            if (P2EndOptionY.activeInHierarchy == false || P2EndOptionN.activeInHierarchy == false) {
+                P2EndOptionY.SetActive(true);
+                P2EndOptionN.SetActive(true);
+            }
+        }
+        if (tutorialProgression > 0 && tutorialProgression < 15) {
+            if (P1Response.activeInHierarchy == false || P2Response.activeInHierarchy == false) {
+                P1Response.SetActive(true);
+                P2Response.SetActive(true);
+            }
+
+            if (P1EndOptionY.activeInHierarchy == true || P1EndOptionN.activeInHierarchy == true) {
+                P1EndOptionY.SetActive(false);
+                P1EndOptionN.SetActive(false);
+            }
+
+            if (P2EndOptionY.activeInHierarchy == true || P2EndOptionN.activeInHierarchy == true) {
+                P2EndOptionY.SetActive(false);
+                P2EndOptionN.SetActive(false);
+            }
         }
     }
 }
