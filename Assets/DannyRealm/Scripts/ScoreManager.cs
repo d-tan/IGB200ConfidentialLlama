@@ -41,13 +41,6 @@ public class ScoreManager : MonoBehaviour {
 		ResetPoints ();
 
 		ReadScoreboardFile ();
-
-		scoreValue = 55;
-		pizzasServed = 6;
-
-//		UpdateScoreboard ();
-
-		UpdateScoreboardDisplay ();
 	}
 
 
