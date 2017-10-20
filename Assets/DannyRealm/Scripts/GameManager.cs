@@ -36,4 +36,8 @@ public class GameManager : MonoBehaviour {
 	public void GoToMenu() {
 		SceneManager.LoadScene (0);
 	}
+
+	public void Reload() {
+		SceneManager.LoadScene (1);
+	}
 }
