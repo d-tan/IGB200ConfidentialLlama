@@ -7,12 +7,14 @@ public class TimerScript : MonoBehaviour {
 
 	public Text timerText;
 	public float gametime = 300.0f;
+	string minutes;
+	string seconds;
 
 	public GameObject endScreen;
 
 	// Use this for initialization
 	void Start () {
-//		endScreen.SetActive (false);
+		//		endScreen.SetActive (false);
 	}
 
 	public void StartTimer() {
@@ -21,13 +23,15 @@ public class TimerScript : MonoBehaviour {
 	}
 
 	void SetGameTime() {
-		timerText.text = gametime.ToString();
+		timerText.text = minutes + ":" + seconds ;
 	}
 
 	void IncrementCounter() {
 		if (gametime > 0.0f) {
 			gametime = gametime - 1.0f;
 			gametime = Mathf.Round (gametime * 100f) / 100f;
+			minutes = Mathf.Floor(gametime / 60).ToString("00");
+			seconds = Mathf.Floor(gametime % 60).ToString("00");
 			SetGameTime ();
 		}
 	}
