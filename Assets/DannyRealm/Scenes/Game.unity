@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4374901, g: 0.48531127, b: 0.56558615, a: 1}
+  m_IndirectSpecularColor: {r: 0.4374895, g: 0.4853106, b: 0.56558496, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1731,7 +1731,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreObject: {fileID: 1796291237}
+  scoreboard: {fileID: 1755005655}
+  endCard: {fileID: 809386093}
   scoreText: {fileID: 1796291239}
+  gameHasEnded: 0
   debug: 1
   P1Input: {fileID: 1736197112}
   P2Input: {fileID: 1622474049}
@@ -1826,7 +1829,7 @@ MonoBehaviour:
   waiterObject: {fileID: 1464266621080082, guid: 5c7c562c08aa446bf90914cf9cf0b20f,
     type: 2}
   spawnPoint: {x: -3.5, y: 0, z: -15}
-  spawnTime: {x: 3, y: 4}
+  spawnTime: {x: 3, y: 6}
   tutorialSpawnTime: {x: 3, y: 4}
   tutorialSpawn: 0
 --- !u!1 &515609696
@@ -3162,7 +3165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &830054040
 RectTransform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,14 @@ public class MenuSceneSwitcher : MonoBehaviour {
 	public bool isQuit;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		if (!PlayerPrefs.HasKey("FirstTimeTutorial")) {
+			PlayerPrefs.SetInt ("FirstTimeTutorial", 0);
+		}
 
+		if (!PlayerPrefs.HasKey("StartWithTutorial")) {
+			PlayerPrefs.SetInt ("StartWithTutorial", 0);
+		}
 	}
 
 	// Update is called once per frame

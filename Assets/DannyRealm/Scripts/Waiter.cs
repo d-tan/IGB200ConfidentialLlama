@@ -6,7 +6,7 @@ public class Waiter : MonoBehaviour {
 
 	// Movement
 	public Vector3[] waypoints;
-	float speed = 6f;
+	float speed = 8f;
 	int currentWaypoint = 0;
 	const float minDistance = 0.05f;
 

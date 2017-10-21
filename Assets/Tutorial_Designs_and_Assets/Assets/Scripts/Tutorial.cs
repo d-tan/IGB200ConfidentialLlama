@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour {
         waiters = GameManager.GetComponent<WaiterManager>();
         gameManager = GetComponent<GameManager> ();
 
-        if (completedTutorial == false) {
+        if (completedTutorial == false && PlayerPrefs.GetInt("FirstTimeTutorial", 0) == 0) {
             //Set the level of tutorial progression to the very beginning
             tutorialProgression = 0;
             //tutorialProgression = 16; //Debug Move
@@ -145,6 +145,10 @@ public class Tutorial : MonoBehaviour {
 
             player01ResponseText.text = "Ok.";
             player02ResponseText.text = player01ResponseText.text;
+
+			P1Response.SetActive(true);
+			P2Response.SetActive(true);
+
         } else if (tutorialProgression == 8) {
             player01Text.text = "We have a state of the art oven, the 'Super Pizza Cooker 5000', it even boxes the pizzas!";
             player02Text.text = player01Text.text;
@@ -181,7 +185,7 @@ public class Tutorial : MonoBehaviour {
             player01Text.text = "I'm going to place two orders for Cheese Pizzas and see if you can complete them yourselves. Good luck!";
             player02Text.text = player01Text.text;
 
-            while (ordersSpawned < 4) {
+            while (ordersSpawned < 2) {
                 orders.CreateOrder(cheesePizza);
                 orders.CreateOrder(cheesePizza);
                 ordersSpawned += 2;
@@ -210,7 +214,10 @@ public class Tutorial : MonoBehaviour {
             player02ResponseText.text = player01ResponseText.text;
         } else if (tutorialProgression == 15) {
             player01Text.text = "I think you're ready to go for real. What do you two say? You can say no and we'll do it again.";
-            player02Text.text = player01Text.text;         
+            player02Text.text = player01Text.text;      
+
+			P1Response.SetActive(false);
+			P2Response.SetActive(false);
 
             P1EndOptionYText.text = "I'm ready!!";
             P2EndOptionYText.text = P1EndOptionYText.text;
@@ -233,6 +240,7 @@ public class Tutorial : MonoBehaviour {
 
             completedTutorial = true;
 			gameManager.TutorialEnded ();
+			PlayerPrefs.SetInt ("FirstTimeTutorial", 1);
             tutorialProgression++;
         }
         if (tutorialProgression >= 11 && tutorialProgression <= 16) {

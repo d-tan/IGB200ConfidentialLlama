@@ -11,10 +11,12 @@ public class TimerScript : MonoBehaviour {
 	string seconds;
 
 	public GameObject endScreen;
+	GameManager gameManager;
 
 	// Use this for initialization
 	void Start () {
 		//		endScreen.SetActive (false);
+		gameManager = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ();
 	}
 
 	public void StartTimer() {
@@ -40,7 +42,10 @@ public class TimerScript : MonoBehaviour {
 	void Update () {
 		if(gametime <= 0.0f) { // When time runs out...
 			// Show score screen
-			endScreen.SetActive (true);
+			if (!endScreen.activeSelf) {
+				endScreen.SetActive (true);
+				gameManager.GameEnded ();
+			}
 		}
 	}
 }

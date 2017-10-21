@@ -49,6 +49,8 @@ public class OrderManager : MonoBehaviour {
 
 		// Get Number of Ingredients in the game
 		numOfIngredients = System.Enum.GetNames (typeof(IngredientID)).Length;
+		ordersList.Clear ();
+		virtualPos.Clear ();
 	}
 
 	void Update() {
@@ -99,7 +101,7 @@ public class OrderManager : MonoBehaviour {
 
 	IngredientID[] RandomiseOrderIngredients(int arrayLength = 4) {
 		// Randomise Number of ingredients in the order
-		int ingredientCount = Random.Range (0, arrayLength - 1);
+		int ingredientCount = Random.Range (1, arrayLength - 1);
 		IngredientID[] ingredientsList = new IngredientID[arrayLength]; // Create array for ingredients
 		
 		// Clear list and Initialise list

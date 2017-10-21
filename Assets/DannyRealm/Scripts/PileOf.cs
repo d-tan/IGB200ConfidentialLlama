@@ -35,6 +35,16 @@ public class PileOf : MonoBehaviour {
 		// Tutorial Only
 		if (!tutorialScript.completedTutorial && currentObject == null) {
 			canSpawn = true;
+			if (!displayObjects[0].activeSelf) {
+				ToggleDisplayObjects (true);
+			}
+
+		// if we can't spawn AND is still tutorial AND we have an object
+		} else if (!canSpawn && !tutorialScript.completedTutorial && currentObject != null) {
+			// if the object we have is being held AND the table model is still on
+			if (currentObject.beingHeld && displayObjects[0].activeSelf) {
+				ToggleDisplayObjects (false);
+			}
 		}
 	}
 
@@ -51,9 +61,13 @@ public class PileOf : MonoBehaviour {
 			tutorialScript.plate = spawnedObject.GetComponent<Plate> ();
 		}
 
-		if (hideIngredient && tutorialScript.completedTutorial) {
+		if (!isPlate)
 			currentObject.ToggleRender (false);
-		}
+
+//		if (hideIngredient && !tutorialScript.completedTutorial) {
+//			
+//			ToggleDisplayObjects (false);
+//		}
 
 		Debug.Assert (currentObject, "Spawned item should have Throwable script attached");
 	}

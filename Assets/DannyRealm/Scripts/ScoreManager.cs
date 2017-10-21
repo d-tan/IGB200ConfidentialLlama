@@ -7,11 +7,15 @@ using System.IO;
 public class ScoreManager : MonoBehaviour {
 
 	public GameObject scoreObject;
+	public GameObject scoreboard;
+	public GameObject endCard;
 
 	public Text scoreText;
 	private int scoreValue = 0;
 	private const int scoreBase = 5;
 	int pizzasServed = 0;
+	[HideInInspector]
+	public bool gameHasEnded = false;
 
 	public bool debug = false;
 
@@ -51,9 +55,11 @@ public class ScoreManager : MonoBehaviour {
 
 	// Increase value of score upon obtaining points
 	public void AwardPoints(int numOfIngredients) {
-		scoreValue += scoreBase * numOfIngredients;
-		pizzasServed++;
-		scoreText.text = scoreValue.ToString();
+		if (!gameHasEnded) {
+			scoreValue += scoreBase * numOfIngredients;
+			pizzasServed++;
+			scoreText.text = scoreValue.ToString ();
+		}
 	}
 
 
@@ -69,6 +75,8 @@ public class ScoreManager : MonoBehaviour {
 		player2Name = P2Input.text;
 
 		UpdateScoreboard ();
+		endCard.SetActive (false);
+		scoreboard.SetActive (true);
 	}
 
 	void UpdateScoreboardDisplay() {

@@ -13,15 +13,16 @@ public class GameManager : MonoBehaviour {
 	ScoreManager scoreManager;
 	public TimerScript timeManager;
 
+
 	void Start() {
 		orderManager = GetComponent<OrderManager> ();
 		scoreManager = GetComponent<ScoreManager> ();
 	}
 
 	public void TutorialBegin() {
-		for (int i = 0; i < piles.Length; i++) {
-			piles [i].ToggleDisplayObjects (false);
-		}
+//		for (int i = 0; i < piles.Length; i++) {
+//			piles [i].ToggleDisplayObjects (false);
+//		}
 	}
 
 	public void TutorialEnded() {
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour {
 		scoreManager.ResetPoints ();
 		timer.SetActive (true);
 		timeManager.StartTimer ();
+	}
+
+	public void GameEnded() {
+		scoreManager.gameHasEnded = true;
 	}
 
 	public void GoToMenu() {
