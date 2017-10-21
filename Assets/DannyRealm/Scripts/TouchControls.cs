@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TouchControls : MonoBehaviour {
 
+	public AudioSource source;
+	public AudioClip whooshSound;
+
 	[HideInInspector]
 	public bool mouseControl = false;
 
@@ -191,6 +194,10 @@ public class TouchControls : MonoBehaviour {
 				}
 
 				obj.flicked = true;
+
+				// Play flick sound effect
+				source.PlayOneShot(whooshSound, 1.0f);
+
 			}
 
 			Debug.Log ("Flick: " + !t_stationary [touch.fingerId] + " counted: " + (magnitude > minVel) + " vel: " + t_velocity[touch.fingerId].sqrMagnitude);
