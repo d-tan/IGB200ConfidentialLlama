@@ -21,7 +21,6 @@ public class ScoreManager : MonoBehaviour {
 
 	// Leaderboard Stuff
 	// Player 1, Player 2, Score, Pizzas Served
-	string filePath = "Assets/Resources/";
 	string fileName = "PizzaFlickScores";
 	const int stringCap = 10;
 	const int numOfLeaders = 10; // Also in the LeaderBoardSave class
@@ -43,6 +42,9 @@ public class ScoreManager : MonoBehaviour {
 		player1Name = "Player 1";
 		player2Name = "Player 2";
 		ResetPoints ();
+
+		scoreValue = Random.Range(400, 500);
+		pizzasServed = Random.Range(10, 40);
 
 		ReadScoreboardFile ();
 	}
@@ -96,11 +98,12 @@ public class ScoreManager : MonoBehaviour {
 		p2Text.text = p2s;
 		scoresText.text = scores;
 		servesText.text = serves;
+
 	}
 
 	void ReadScoreboardFile() {
-		string completeFilePath = filePath + fileName + ".json";
-		string file = File.ReadAllText (completeFilePath);
+		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
+
 
 		// Read from Json
 		saveClass = JsonUtility.FromJson<ScoreBoardSave> (file);
@@ -115,6 +118,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void UpdateScoreboard() {
+
 		if (scoreValue > entries[numOfLeaders - 1].score) {
 			ScoreEntry newEntry = new ScoreEntry (player1Name, player2Name, scoreValue, pizzasServed);
 			entries [numOfLeaders - 1] = newEntry;
@@ -130,22 +134,21 @@ public class ScoreManager : MonoBehaviour {
 			}
 
 			SaveScoreboard ();
-			UpdateScoreboardDisplay ();
 		}
+		UpdateScoreboardDisplay ();
 	}
 
 	void SaveScoreboard() {
-		string completeFilePath = filePath + fileName + ".json";
 
 		for (int i = 0; i < numOfLeaders; i++) {
 			saveClass.P1 [i] = entries [i].P1Name;
 			saveClass.P2 [i] = entries [i].P2Name;
 			saveClass.scores [i] = entries [i].score;
 			saveClass.serves [i] = entries [i].pizzasServed;
-//			Debug.Log(saveClass.P1 [i] + " " + saveClass.scores [i]);
 		}
 
-		File.WriteAllText (completeFilePath, JsonUtility.ToJson (saveClass, true));
+		File.WriteAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"), JsonUtility.ToJson (saveClass, true));
+
 	}
 }
 

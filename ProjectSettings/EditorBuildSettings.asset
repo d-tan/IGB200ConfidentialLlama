@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/DannyRealm/Scenes/Menu.unity
     guid: 2cb02864b98b80742a819dd2f1345b46
   - enabled: 1
-    path: Assets/DannyRealm/Scenes/TestScene.unity
+    path: Assets/DannyRealm/Scenes/Game.unity
     guid: b581cddfbcf1c472c9f1b69b1f7ba9a5
