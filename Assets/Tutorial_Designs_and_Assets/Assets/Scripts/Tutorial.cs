@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour {
         waiters = GameManager.GetComponent<WaiterManager>();
         gameManager = GetComponent<GameManager> ();
 
-        if (completedTutorial == false && PlayerPrefs.GetInt("FirstTimeTutorial", 0) == 0) {
+		if (completedTutorial == false && (PlayerPrefs.GetInt("FirstTimeTutorial", 0) == 0 || PlayerPrefs.GetInt("StartWithTutorial", 0) == 1)) {
             //Set the level of tutorial progression to the very beginning
             tutorialProgression = 0;
             //tutorialProgression = 16; //Debug Move
@@ -241,6 +241,7 @@ public class Tutorial : MonoBehaviour {
             completedTutorial = true;
 			gameManager.TutorialEnded ();
 			PlayerPrefs.SetInt ("FirstTimeTutorial", 1);
+			PlayerPrefs.SetInt ("StartWithTutorial", 0);
             tutorialProgression++;
         }
         if (tutorialProgression >= 11 && tutorialProgression <= 16) {

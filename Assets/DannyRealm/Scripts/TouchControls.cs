@@ -40,8 +40,8 @@ public class TouchControls : MonoBehaviour {
 		}
 
 		// CoW Build
-		flickTime = 0;
-		minVel = 0;
+		flickTime = 0.2f;
+		minVel = 0.02f;
 	}
 	
 	// Update is called once per frame

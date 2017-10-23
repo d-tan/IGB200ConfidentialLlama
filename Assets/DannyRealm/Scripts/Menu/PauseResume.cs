@@ -10,7 +10,13 @@ public class PauseResume : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		if (!PlayerPrefs.HasKey("FirstTimeTutorial")) {
+			PlayerPrefs.SetInt ("FirstTimeTutorial", 0);
+		}
+
+		if (!PlayerPrefs.HasKey("StartWithTutorial")) {
+			PlayerPrefs.SetInt ("StartWithTutorial", 0);
+		}
 	}
 
 
@@ -24,6 +30,11 @@ public class PauseResume : MonoBehaviour {
 			controls.enabled = true;
 			paused = false;
 		}
+	}
+
+	public void PlayTutorial() {
+		PlayerPrefs.SetInt ("StartWithTutorial", 1);
+		ChangeToTutorial ();
 	}
 
 	public void ChangeToTutorial() {
