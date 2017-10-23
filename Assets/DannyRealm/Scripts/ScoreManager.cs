@@ -106,7 +106,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void ReadScoreboardFile() {
-//		AddText ("Reading scoreboard file...\n");
+		AddText ("Reading scoreboard file...");
 		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
 
 		// Read from Json
@@ -143,7 +143,7 @@ public class ScoreManager : MonoBehaviour {
 			SaveScoreboard ();
 		}
 
-//		AddText ("Updating display... \n");
+		AddText ("Updating display... \n");
 		UpdateScoreboardDisplay ();
 	}
 
@@ -158,9 +158,11 @@ public class ScoreManager : MonoBehaviour {
 		}
 
 		AddText ("Writing to file...");
-//		AddText ("Path: " + File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json")));
-//		AddText ("ToJson: " + JsonUtility.ToJson (saveClass, false) + "\n");
-		File.WriteAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"), JsonUtility.ToJson (saveClass, true));
+		AddText ("Path: " + File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json")));
+		AddText(Path.Combine (Application.streamingAssetsPath, fileName + ".json") + "\n");
+//		AddText ("ToJson: " + JsonUtility.ToJson (saveClass, false));
+		string jsonString = JsonUtility.ToJson (saveClass, true);
+		File.WriteAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"), jsonString);
 		AddText ("Done Saving.\n");
 	}
 
