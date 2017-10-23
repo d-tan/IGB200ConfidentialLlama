@@ -208,6 +208,7 @@ public class TouchControls : MonoBehaviour {
 				obj.flicked = true;
 
 				// Play flick sound effect
+				source.pitch = Random.Range (0.8f, 1.2f);
 				source.PlayOneShot(whooshSound, 1.0f);
 
 			}

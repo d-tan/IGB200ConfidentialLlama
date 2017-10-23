@@ -186,6 +186,7 @@ MonoBehaviour:
   - {x: -3.5, y: 0, z: 2}
   - {x: 3.5, y: 0, z: 2}
   - {x: 3.5, y: 0, z: -15}
+  childRenderer: {fileID: 23562935190551650}
 --- !u!136 &136273966320487896
 CapsuleCollider:
   m_ObjectHideFlags: 1

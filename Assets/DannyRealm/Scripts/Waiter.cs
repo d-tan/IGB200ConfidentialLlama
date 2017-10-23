@@ -10,8 +10,12 @@ public class Waiter : MonoBehaviour {
 	int currentWaypoint = 0;
 	const float minDistance = 0.05f;
 
+	public MeshRenderer childRenderer;
+	Color originalColour;
+
 	// Use this for initialization
 	void Start () {
+		originalColour = childRenderer.material.color;
 		NextWaypoint ();
 	}
 	
@@ -42,5 +46,16 @@ public class Waiter : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionEnter(Collision col) {
+		if (col.transform.CompareTag("Ingredient") || col.transform.CompareTag("Plate")) {
+			StartCoroutine (FlashRed ());
+		}
+	}
 
+	IEnumerator FlashRed() {
+		childRenderer.material.color = Color.red;
+		yield return new WaitForSeconds (0.3f);
+		childRenderer.material.color = originalColour;
+
+	}
 }
