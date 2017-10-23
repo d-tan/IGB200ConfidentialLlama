@@ -54,13 +54,10 @@ public class OrderManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.P)) {
-			CreateOrder ();
-		}
 
 		if (tutorialScript.completedTutorial) 
 			OrderSpawner ();
-		
+
 		MoveUpOrders ();
 	}
 

@@ -7,6 +7,8 @@ public class OrderReceiver : MonoBehaviour {
 
 	public Order currentOrder;
 	public GameObject orderUI;
+	public Image clipboard;
+	public Sprite[] clipboardSprites = new Sprite[2];
 	public Image[] ingredientSprite = new Image[4];
 	public Sprite[] sprites = new Sprite[6];
 	Vector3 parentPos;
@@ -22,6 +24,9 @@ public class OrderReceiver : MonoBehaviour {
 	public void OrderCompleted() {
 		Destroy (currentOrder.gameObject);
 		currentOrder = null;
+
+		clipboard.sprite = clipboardSprites [0];
+
 		for (int i = 0; i < ingredientSprite.Length; i++) {
 			ingredientSprite [i].sprite = sprites [0];
 		}
@@ -31,10 +36,11 @@ public class OrderReceiver : MonoBehaviour {
 		if (currentOrder) {
 			currentOrder.rb.velocity = new Vector3 (0, 0, 0);
 			currentOrder.transform.position = parentPos;
-			Debug.Log (parentPos);
 			currentOrder.myCollider.enabled = false;
-
+			currentOrder.gameObject.SetActive (false);
 			OrderManager.RemoveOrder (currentOrder);
+
+			clipboard.sprite = clipboardSprites [1];
 
 			// Display Recipe
 			for (int i = 0; i < ingredientSprite.Length; i++) {
@@ -51,15 +57,18 @@ public class OrderReceiver : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Order")) {
 			Order script = other.GetComponent<Order> ();
+			Debug.Log("Order detected");
 			if (currentOrder == null) {
 				script.returnMe = false;
-
+				Debug.Log("I don't have an order");
 				if (script.beingHeld) {
+					Debug.Log("It's being held");
 					if (!colliding.ContainsKey (other))
 						colliding.Add (other, script);
 				} else {
 					currentOrder = script;
 					InitialiseOrder ();
+					Debug.Log ("storing order");
 				}
 			} else {
 				script.returnMe = true;

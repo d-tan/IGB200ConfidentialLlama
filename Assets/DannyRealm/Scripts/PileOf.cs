@@ -28,7 +28,7 @@ public class PileOf : MonoBehaviour {
 			canSpawn = false;
 			SpawnItem ();
 		} else {
-			if (tutorialScript.completedTutorial && (spawnedObject == null || spawnedObject.transform.parent != null))
+			if (tutorialScript.completedTutorial && (spawnedObject == null)) // || spawnedObject.transform.parent != null
 				canSpawn = true;
 		}
 

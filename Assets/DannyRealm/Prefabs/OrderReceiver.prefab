@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146830268243294}
   m_LocalRotation: {x: 0.000001809995, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.44, y: -0.001, z: -9.51}
+  m_LocalPosition: {x: 13.44, y: -0.050000012, z: -9.51}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4735846759504876}
@@ -79,7 +79,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146830268243294}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -87,7 +87,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 784a934430407ad45ab9ceab60206dfa, type: 2}
-  - {fileID: 2100000, guid: f2e537aa349fa9f4c8b6771a9ece5100, type: 2}
+  - {fileID: 2100000, guid: 45a289b71cb5b4162abab1418efd3b8b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,7 +131,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.035657, y: 1.1203942, z: 6.311547}
-  m_Center: {x: -1.5178256, y: 0.060196895, z: 2.6557763}
+  m_Center: {x: 1.517826, y: 0.060196895, z: 2.6557763}
 --- !u!114 &114135412814261382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,3 +143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8708d5e2f4ff54897b73f137d74f3f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentOrder: {fileID: 0}
+  orderUI: {fileID: 0}
+  clipboard: {fileID: 0}
+  clipboardSprites:
+  - {fileID: 21300000, guid: 872570d3c3df4be46899a391a4811a75, type: 3}
+  - {fileID: 21300000, guid: 6bfc965e31bd79841b5de96a9abcee6c, type: 3}
+  ingredientSprite:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: ba32429cc048e774ea6e0212b4559de8, type: 3}
+  - {fileID: 21300000, guid: 48de785c6adc26e4a8e6dcd681541c09, type: 3}
+  - {fileID: 21300000, guid: 47e80265c6599734da4d10a7abb6dab7, type: 3}
+  - {fileID: 21300000, guid: b2d6f50a652b2f847b2efd312421f1bb, type: 3}
+  - {fileID: 21300000, guid: 69bd8c1b1aa5b5042a5350e00bf06423, type: 3}
+  - {fileID: 21300000, guid: 92b0301416eaeeb4f86b94d6baf00a9a, type: 3}
