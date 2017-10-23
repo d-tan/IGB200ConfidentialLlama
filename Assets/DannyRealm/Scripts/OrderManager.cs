@@ -46,6 +46,8 @@ public class OrderManager : MonoBehaviour {
 
 	void Start() {
 		tutorialScript = GetComponent<Tutorial> ();
+		spawnTimer = 0;
+		numOrders = 0;
 
 		// Get Number of Ingredients in the game
 		numOfIngredients = System.Enum.GetNames (typeof(IngredientID)).Length;

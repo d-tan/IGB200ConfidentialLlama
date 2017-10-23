@@ -43,8 +43,8 @@ public class ScoreManager : MonoBehaviour {
 		player2Name = "Player 2";
 		ResetPoints ();
 
-		scoreValue = Random.Range(400, 500);
-		pizzasServed = Random.Range(10, 40);
+//		scoreValue = Random.Range(400, 500);
+//		pizzasServed = Random.Range(10, 40);
 
 		ReadScoreboardFile ();
 	}

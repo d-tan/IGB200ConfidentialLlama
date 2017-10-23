@@ -27,7 +27,7 @@ public class TouchControls : MonoBehaviour {
 	public float minVel = 1;
 	public Vector2 flickVelBounds = new Vector2 ();
 	float flickVelMultiplier = 7f;
-	float flickTime = 0.07f; // time needed for the object to be held before you can flick it
+	public float flickTime = 0.1f; // time needed for the object to be held before you can flick it
 
 	// Mouse
 	RaycastHit m_RayCast;
@@ -38,6 +38,10 @@ public class TouchControls : MonoBehaviour {
 		for (int i = 0; i < t_stationary.Length; i++) {
 			t_stationary [i] = true;
 		}
+
+		// CoW Build
+		flickTime = 0;
+		minVel = 0;
 	}
 	
 	// Update is called once per frame
@@ -48,6 +52,14 @@ public class TouchControls : MonoBehaviour {
 		
 		Touch ();
 
+	}
+
+	public void SetValueTime(string num) {
+		flickTime = float.Parse (num);
+	}
+
+	public void SetValueVel(string num) {
+		minVel = float.Parse (num);
 	}
 
 	void Touch() {
