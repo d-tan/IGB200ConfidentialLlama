@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6ee6fdc4d8a61e642b02fbefc4320e7d
-timeCreated: 1508798901
+guid: 16e388d17e334ae4da1582b48821f6aa
+timeCreated: 1508798935
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere.005
+    4300000: Room
   materials:
     importMaterials: 1
     materialName: 0
