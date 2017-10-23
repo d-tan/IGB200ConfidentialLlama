@@ -34,14 +34,18 @@ public class TouchControls : MonoBehaviour {
 	GameObject m_HeldObject;
 	Vector3 m_mousePos;
 
+	public bool CoWBuild = false;
+
 	void Start() {
 		for (int i = 0; i < t_stationary.Length; i++) {
 			t_stationary [i] = true;
 		}
 
 		// CoW Build
-		flickTime = 0.2f;
-		minVel = 0.02f;
+		if (CoWBuild) {
+			flickTime = 0.2f;
+			minVel = 0.02f;
+		}
 	}
 	
 	// Update is called once per frame

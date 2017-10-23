@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviour {
 	public bool gameHasEnded = false;
 
 	public bool debug = false;
+	public Text debugText;
 
 	// Leaderboard Stuff
 	// Player 1, Player 2, Score, Pizzas Served
@@ -29,6 +30,7 @@ public class ScoreManager : MonoBehaviour {
 
 	public InputField P1Input;
 	public InputField P2Input;
+	public GameObject submitButton;
 
 	public Text p1Text;
 	public Text p2Text;
@@ -42,9 +44,6 @@ public class ScoreManager : MonoBehaviour {
 		player1Name = "Player 1";
 		player2Name = "Player 2";
 		ResetPoints ();
-
-//		scoreValue = Random.Range(400, 500);
-//		pizzasServed = Random.Range(10, 40);
 
 		ReadScoreboardFile ();
 	}
@@ -75,6 +74,11 @@ public class ScoreManager : MonoBehaviour {
 	public void SubmitName() {
 		player1Name = P1Input.text;
 		player2Name = P2Input.text;
+//		submitButton.SetActive (false);
+//		AddText ("Submitting Names...\n");
+		scoreValue = Random.Range(400, 500);
+		pizzasServed = Random.Range(10, 40);
+		Debug.Log ("Score: " + scoreValue + " " + pizzasServed);
 
 		UpdateScoreboard ();
 		endCard.SetActive (false);
@@ -102,27 +106,31 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void ReadScoreboardFile() {
+//		AddText ("Reading scoreboard file...\n");
 		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
-
 
 		// Read from Json
 		saveClass = JsonUtility.FromJson<ScoreBoardSave> (file);
 
 		ScoreEntry entry;
 
+//		AddText ("Storing scoreboard entries... ");
 		for (int i = 0; i < numOfLeaders; i++) {
 			entry = new ScoreEntry (saveClass.P1 [i], saveClass.P2 [i], saveClass.scores [i], saveClass.serves [i]);
 
 			entries [i] = entry;
+			AddText (saveClass.P1 [i] + ": " + saveClass.scores [i] + " || ");
 		}
+//		AddText ("\n");
 	}
 
 	void UpdateScoreboard() {
-
+//		AddText("Updating scoreboard...\n");
 		if (scoreValue > entries[numOfLeaders - 1].score) {
 			ScoreEntry newEntry = new ScoreEntry (player1Name, player2Name, scoreValue, pizzasServed);
 			entries [numOfLeaders - 1] = newEntry;
 
+			AddText ("Current entry qualifies... ");
 			for (int i = numOfLeaders - 2; i >= 0; i--) {
 				if (entries[i].score < newEntry.score) {
 
@@ -132,14 +140,16 @@ public class ScoreManager : MonoBehaviour {
 					break;
 				}
 			}
-
 			SaveScoreboard ();
 		}
+
+//		AddText ("Updating display... \n");
 		UpdateScoreboardDisplay ();
 	}
 
 	void SaveScoreboard() {
-
+		AddText ("Saving scoreboard... ");
+//		AddText ("Storing entries... ");
 		for (int i = 0; i < numOfLeaders; i++) {
 			saveClass.P1 [i] = entries [i].P1Name;
 			saveClass.P2 [i] = entries [i].P2Name;
@@ -147,8 +157,16 @@ public class ScoreManager : MonoBehaviour {
 			saveClass.serves [i] = entries [i].pizzasServed;
 		}
 
+		AddText ("Writing to file...");
+//		AddText ("Path: " + File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json")));
+//		AddText ("ToJson: " + JsonUtility.ToJson (saveClass, false) + "\n");
 		File.WriteAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"), JsonUtility.ToJson (saveClass, true));
+		AddText ("Done Saving.\n");
+	}
 
+	void AddText(string words) {
+		if (debug)
+			debugText.text += words;
 	}
 }
 

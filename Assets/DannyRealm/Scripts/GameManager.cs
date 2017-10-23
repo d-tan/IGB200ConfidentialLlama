@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
 	public void GameEnded() {
 		scoreManager.gameHasEnded = true;
+		scoreManager.submitButton.SetActive (true);
 	}
 
 	public void GoToMenu() {
