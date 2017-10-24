@@ -18,7 +18,6 @@ public class ScoreManager : MonoBehaviour {
 	public bool gameHasEnded = false;
 
 	public bool debug = false;
-	public Text debugText;
 
 	// Leaderboard Stuff
 	// Player 1, Player 2, Score, Pizzas Served
@@ -48,21 +47,19 @@ public class ScoreManager : MonoBehaviour {
 		Debug.Log("Checking platforms");
 		#if (PLATFORM_IPHONE)
 			if (!File.Exists(Path.Combine(Application.persistentDataPath, fileName + ".json"))) {
+				Debug.Log("Creaing file");
 				File.Create(Path.Combine(Application.persistentDataPath, fileName + ".json")).Dispose();
-				File.WriteAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"), JsonUtility.ToJson(new ScoreBoardSave()));
+				string content = JsonUtility.ToJson(new ScoreBoardSave());
+				File.WriteAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"), content);
 			}
-			
+			Debug.Log("Path exists: " + File.Exists(Path.Combine(Application.persistentDataPath, fileName + ".json")));
+			Debug.Log("JsonFile: " + JsonUtility.ToJson(new ScoreBoardSave()));
+			Debug.Log("Stored file: " + File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json")));
 		#endif
 
-		Debug.Log ("Starting to read");
 		ReadScoreboardFile ();
+		UpdateScoreboard ();
 	}
-
-
-	void Update() {
-
-	}
-
 
 	// Increase value of score upon obtaining points
 	public void AwardPoints(int numOfIngredients) {
@@ -77,7 +74,8 @@ public class ScoreManager : MonoBehaviour {
 	public void ResetPoints() {
 		scoreValue = 0;
 		pizzasServed = 0;
-		scoreText.text = scoreValue.ToString();
+		if (scoreText != null)
+			scoreText.text = scoreValue.ToString();
 	}
 
 	// For SubmitButton
@@ -85,10 +83,7 @@ public class ScoreManager : MonoBehaviour {
 		player1Name = P1Input.text;
 		player2Name = P2Input.text;
 //		submitButton.SetActive (false);
-//		AddText ("Submitting Names...\n");
 //		scoreValue = Random.Range(400, 500);
-		scoreValue += 10;
-//		pizzasServed = Random.Range(10, 40);
 		Debug.Log ("Score: " + scoreValue + " " + pizzasServed);
 
 		UpdateScoreboard ();
@@ -117,35 +112,39 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void ReadScoreboardFile() {
-		AddText ("Reading scoreboard file...");
+		Debug.Log ("Reading scoreboard file...");
 		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
 
 		#if (PLATFORM_IPHONE)
-			file = Path.Combine(Application.persistentDataPath, fileName + ".json");
+			file = File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"));
 		#endif
+
+		Debug.Log ("Inside File: " + file);
 
 		// Read from Json
 		saveClass = JsonUtility.FromJson<ScoreBoardSave> (file);
 
+		Debug.Log ("Saveclass: " + (saveClass != null).ToString ());
+
 		ScoreEntry entry;
 
-//		AddText ("Storing scoreboard entries... ");
+		Debug.Log ("Storing scoreboard entries...");
 		for (int i = 0; i < numOfLeaders; i++) {
+			
 			entry = new ScoreEntry (saveClass.P1 [i], saveClass.P2 [i], saveClass.scores [i], saveClass.serves [i]);
 
 			entries [i] = entry;
-			AddText (saveClass.P1 [i] + ": " + saveClass.scores [i] + " || ");
 		}
-//		AddText ("\n");
 	}
 
 	void UpdateScoreboard() {
-//		AddText("Updating scoreboard...\n");
+		Debug.Log ("UpdateScoreboard()");
+
 		if (scoreValue > entries[numOfLeaders - 1].score) {
 			ScoreEntry newEntry = new ScoreEntry (player1Name, player2Name, scoreValue, pizzasServed);
 			entries [numOfLeaders - 1] = newEntry;
+			Debug.Log ("Current entries qualify");
 
-			AddText ("Current entry qualifies... ");
 			for (int i = numOfLeaders - 2; i >= 0; i--) {
 				if (entries[i].score < newEntry.score) {
 
@@ -158,12 +157,12 @@ public class ScoreManager : MonoBehaviour {
 			SaveScoreboard ();
 		}
 
-		AddText ("Updating display... \n");
+		Debug.Log ("Updating display");
 		UpdateScoreboardDisplay ();
 	}
 
 	void SaveScoreboard() {
-		AddText ("Saving scoreboard... ");
+		Debug.Log ("Saving scoreboard...");
 //		AddText ("Storing entries... ");
 		for (int i = 0; i < numOfLeaders; i++) {
 			saveClass.P1 [i] = entries [i].P1Name;
@@ -172,33 +171,48 @@ public class ScoreManager : MonoBehaviour {
 			saveClass.serves [i] = entries [i].pizzasServed;
 		}
 
-		AddText ("Writing to file...");
-		AddText ("Path: " + File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json")));
-//		AddText(Path.Combine (Application.streamingAssetsPath, fileName + ".json") + "\n");
-//		AddText ("ToJson: " + JsonUtility.ToJson (saveClass, false));
+		Debug.Log ("Writing to file");
+
 		string jsonString = JsonUtility.ToJson (saveClass, true);
 
+		string pathDir = "";
 
+		#if (PLATFORM_IPHONE)
+			pathDir = Path.Combine(Application.persistentDataPath, fileName + ".json");
+		#else
+			pathDir = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+		#endif
+		Debug.Log ("Path: " + pathDir);
 
-
-		if (File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json"))) {
-			string pathDir = "";
-
-			#if (PLATFORM_IPHONE)
-				pathDir = Path.Combine(Application.persistentDataPath, fileName + ".json");
-			#else
-				pathDir = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-			#endif
-			AddText (pathDir);
-			AddText (Application.persistentDataPath);
+		if (File.Exists (pathDir)) {
 			File.WriteAllText (pathDir, jsonString);
 		}
-		AddText ("Done Saving.\n");
+		Debug.Log ("Done Saving");
 	}
 
-	void AddText(string words) {
-		if (debug)
-			debugText.text += words;
+	public void ResetScoreboard() {
+		string path = "";
+		#if (PLATFORM_IPHONE)
+		path = Path.Combine(Application.persistentDataPath, fileName + ".json");
+		#else
+		path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+		#endif
+
+		if (File.Exists(path)) {
+			string json = JsonUtility.ToJson (new ScoreBoardSave (), true);
+			File.WriteAllText (path, json);
+			ReadScoreboardFile ();
+			UpdateScoreboard ();
+			Debug.Log ("Rewritten File");
+		}
+	}
+
+	public void ShowScoreboard() {
+		scoreboard.SetActive (true);
+	}
+
+	public void BackButton() {
+		scoreboard.SetActive (false);
 	}
 }
 
