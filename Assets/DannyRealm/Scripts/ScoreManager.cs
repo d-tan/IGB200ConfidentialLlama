@@ -45,6 +45,16 @@ public class ScoreManager : MonoBehaviour {
 		player2Name = "Player 2";
 		ResetPoints ();
 
+		Debug.Log("Checking platforms");
+		#if (PLATFORM_IPHONE)
+			if (!File.Exists(Path.Combine(Application.persistentDataPath, fileName + ".json"))) {
+				File.Create(Path.Combine(Application.persistentDataPath, fileName + ".json")).Dispose();
+				File.WriteAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"), JsonUtility.ToJson(new ScoreBoardSave()));
+			}
+			
+		#endif
+
+		Debug.Log ("Starting to read");
 		ReadScoreboardFile ();
 	}
 
@@ -76,8 +86,9 @@ public class ScoreManager : MonoBehaviour {
 		player2Name = P2Input.text;
 //		submitButton.SetActive (false);
 //		AddText ("Submitting Names...\n");
-		scoreValue = Random.Range(400, 500);
-		pizzasServed = Random.Range(10, 40);
+//		scoreValue = Random.Range(400, 500);
+		scoreValue += 10;
+//		pizzasServed = Random.Range(10, 40);
 		Debug.Log ("Score: " + scoreValue + " " + pizzasServed);
 
 		UpdateScoreboard ();
@@ -108,6 +119,10 @@ public class ScoreManager : MonoBehaviour {
 	void ReadScoreboardFile() {
 		AddText ("Reading scoreboard file...");
 		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
+
+		#if (PLATFORM_IPHONE)
+			file = Path.Combine(Application.persistentDataPath, fileName + ".json");
+		#endif
 
 		// Read from Json
 		saveClass = JsonUtility.FromJson<ScoreBoardSave> (file);
@@ -159,10 +174,25 @@ public class ScoreManager : MonoBehaviour {
 
 		AddText ("Writing to file...");
 		AddText ("Path: " + File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json")));
-		AddText(Path.Combine (Application.streamingAssetsPath, fileName + ".json") + "\n");
+//		AddText(Path.Combine (Application.streamingAssetsPath, fileName + ".json") + "\n");
 //		AddText ("ToJson: " + JsonUtility.ToJson (saveClass, false));
 		string jsonString = JsonUtility.ToJson (saveClass, true);
-		File.WriteAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"), jsonString);
+
+
+
+
+		if (File.Exists (Path.Combine (Application.streamingAssetsPath, fileName + ".json"))) {
+			string pathDir = "";
+
+			#if (PLATFORM_IPHONE)
+				pathDir = Path.Combine(Application.persistentDataPath, fileName + ".json");
+			#else
+				pathDir = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+			#endif
+			AddText (pathDir);
+			AddText (Application.persistentDataPath);
+			File.WriteAllText (pathDir, jsonString);
+		}
 		AddText ("Done Saving.\n");
 	}
 

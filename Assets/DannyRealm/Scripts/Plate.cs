@@ -13,9 +13,9 @@ public enum IngredientID {
 
 public class Plate : MonoBehaviour {
 
-	Collider myCollider;
+//	Collider myCollider;
 	public Throwable throwScript;
-	float colliderHeight = 0f;
+//	float colliderHeight = 0f;
 
 	// Ingredients
 	const int numOfIngredients = 4;
@@ -28,10 +28,10 @@ public class Plate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		myCollider = GetComponent<Collider> ();
+//		myCollider = GetComponent<Collider> ();
 		throwScript = GetComponent<Throwable> ();
 
-		colliderHeight = myCollider.bounds.extents.y;
+//		colliderHeight = myCollider.bounds.extents.y;
 	}
 
 	public void IngredientTrigger(Ingredient script) {

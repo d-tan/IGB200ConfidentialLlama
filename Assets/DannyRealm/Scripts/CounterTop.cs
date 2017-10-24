@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CounterTop : MonoBehaviour {
 
-	GameObject child;
-	Collider trigger;
+//	GameObject child;
+//	Collider trigger;
 
 	public int side = 0;
 
@@ -15,8 +15,8 @@ public class CounterTop : MonoBehaviour {
 
 
 	void Start() {
-		child = transform.GetChild (0).gameObject;
-		trigger = child.GetComponent<Collider> ();
+//		child = transform.GetChild (0).gameObject;
+//		trigger = child.GetComponent<Collider> ();
 	}
 
 	void Update() {

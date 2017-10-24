@@ -9,13 +9,13 @@ public class GameManager : MonoBehaviour {
 	public GameObject timer;
 
 	// Managers
-	OrderManager orderManager;
+//	OrderManager orderManager;
 	ScoreManager scoreManager;
 	public TimerScript timeManager;
 
 
 	void Start() {
-		orderManager = GetComponent<OrderManager> ();
+//		orderManager = GetComponent<OrderManager> ();
 		scoreManager = GetComponent<ScoreManager> ();
 	}
 
