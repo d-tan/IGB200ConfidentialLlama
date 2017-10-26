@@ -107,10 +107,11 @@ public class Oven : MonoBehaviour {
 			inputParticlesR.time = 0;
 			inputParticlesR.Play ();
 		}
-
+			
 		scoreManager.AwardPoints (numOfMatches);
 		TutorialProgress ();
 		OrderManager.numOrders--;
+		OrderManager.rampTimer += 1;
 	}
 
 	void TutorialProgress() {

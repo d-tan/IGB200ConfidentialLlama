@@ -36,7 +36,17 @@ public class OrderManager : MonoBehaviour {
 	List<IngredientID> availableIngredients = new List<IngredientID>();
 
 	// Difficulty curve
-
+	float variationStep = 0.2f;
+	float spawnTimeStep = 1.2f;
+	float rampTimeMultiplier = 0.1f;
+	float rampTime = 2.5f;
+	float rampTimeStep = 2f;
+	float rampTimeStepStep = 0.5f;
+	public static float rampTimer = 0f;
+	public float displayRampTimer = 0f;
+	int lowerBoundComplex = 0;
+	int uppwerBoundComplex = 1;
+	int rampStage = 0;
 
 	void Awake() {
 		// Create singleton
@@ -61,6 +71,8 @@ public class OrderManager : MonoBehaviour {
 			OrderSpawner ();
 
 		MoveUpOrders ();
+
+		RampStages ();
 	}
 
 	public void CreateOrder() {
@@ -100,7 +112,7 @@ public class OrderManager : MonoBehaviour {
 
 	IngredientID[] RandomiseOrderIngredients(int arrayLength = 4) {
 		// Randomise Number of ingredients in the order
-		int ingredientCount = Random.Range (1, arrayLength - 1);
+		int ingredientCount = Random.Range (lowerBoundComplex, Mathf.Clamp(arrayLength - 1 - uppwerBoundComplex, 1, 3));
 		IngredientID[] ingredientsList = new IngredientID[arrayLength]; // Create array for ingredients
 		
 		// Clear list and Initialise list
@@ -175,5 +187,23 @@ public class OrderManager : MonoBehaviour {
 		ordersList.Remove (order);
 	}
 
+	void RampStages() {
+		rampTimer = Mathf.Clamp (rampTimer - Time.deltaTime * rampTimeMultiplier, 0, 30);
+		displayRampTimer = rampTimer;
 
+		if (rampTimer >= rampTime) {
+			Ramp ();
+			rampTime += rampTimeStep;
+			rampTimeStep += rampTimeStepStep;
+		}
+	}
+
+	void Ramp() {
+		rampStage++;
+
+		if (lowerBoundComplex < 3)
+			lowerBoundComplex += Mathf.Clamp (rampStage % 2 - 1, 0, 1);
+		if (uppwerBoundComplex > 0)
+			uppwerBoundComplex -= rampStage % 2;
+	}
 }
