@@ -27,7 +27,7 @@ public class OrderManager : MonoBehaviour {
 	// Order generation
 	[Header("Order generation")]
 	Tutorial tutorialScript;
-	float spawnTime = 7f;
+	float spawnTime = 5f;
 	float timerVariation = 2f;
 	float spawnTimer = 0f;
 
@@ -36,17 +36,15 @@ public class OrderManager : MonoBehaviour {
 	List<IngredientID> availableIngredients = new List<IngredientID>();
 
 	// Difficulty curve
-	float variationStep = 0.2f;
-	float spawnTimeStep = 1.2f;
 	float rampTimeMultiplier = 0.1f;
-	float rampTime = 2.5f;
-	float rampTimeStep = 2f;
+	float rampTime = 2f;
+	float rampTimeStep = 1.5f;
 	float rampTimeStepStep = 0.5f;
 	public static float rampTimer = 0f;
 	public float displayRampTimer = 0f;
 	int lowerBoundComplex = 0;
 	int uppwerBoundComplex = 1;
-	int rampStage = 0;
+	public int rampStage = 0;
 
 	void Awake() {
 		// Create singleton

@@ -102,13 +102,15 @@ public class Oven : MonoBehaviour {
 		SetInputParticlesCorrect ();
 		if (inputSide == -1) {
 			inputParticlesL.time = 0;
+			scoreManager.AwardPoints (numOfMatches, -1);
 			inputParticlesL.Play ();
 		} else {
 			inputParticlesR.time = 0;
+			scoreManager.AwardPoints (numOfMatches, 1);
 			inputParticlesR.Play ();
 		}
 			
-		scoreManager.AwardPoints (numOfMatches);
+
 		TutorialProgress ();
 		OrderManager.numOrders--;
 		OrderManager.rampTimer += 1;

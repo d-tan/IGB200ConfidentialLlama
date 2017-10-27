@@ -87,9 +87,25 @@ public class Throwable : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		if (!beingHeld && col.transform.CompareTag ("Wall")) {
 			side = 0;
-			Debug.Log ("Hit a wall");
+
 		} else if (!this.CompareTag("Order") && col.transform.CompareTag("Waiter")) {
-			Debug.Log ("Hit waiter");
+
+			if(isIngredient) {
+				Ingredient temp = GetComponent<Ingredient> ();
+
+				if (temp) {
+					ParticleManager.singleton.DoSplat (transform.position, temp.ingredientID);
+				}
+
+			} else {
+				Plate temp = GetComponent<Plate> ();
+
+				if (temp) {
+					ParticleManager.singleton.DoSplat (transform.position, IngredientID.None);
+					ParticleManager.singleton.DoSplat (transform.position, temp.ingredients);
+				}
+			}
+
 			Destroy (this.gameObject);
 		}
 

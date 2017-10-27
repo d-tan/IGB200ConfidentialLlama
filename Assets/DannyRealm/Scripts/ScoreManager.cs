@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour {
 	public GameObject scoreObject;
 	public GameObject scoreboard;
 	public GameObject endCard;
+	public Text scoreAddL;
+	public Text scoreAddR;
 
 	public Text scoreText;
 	private int scoreValue = 0;
@@ -16,6 +18,11 @@ public class ScoreManager : MonoBehaviour {
 	int pizzasServed = 0;
 	[HideInInspector]
 	public bool gameHasEnded = false;
+
+	// Score Addition
+	Vector2 scoreFadeTimer = new Vector2 (0, 0);
+	Color scoreFadeColour;
+	float scoreFadeTime = 1.5f;
 
 	public bool debug = false;
 
@@ -42,6 +49,7 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		player1Name = "Player 1";
 		player2Name = "Player 2";
+		scoreFadeColour = scoreAddR.color;
 		ResetPoints ();
 
 		Debug.Log("Checking platforms");
@@ -61,12 +69,52 @@ public class ScoreManager : MonoBehaviour {
 		UpdateScoreboard ();
 	}
 
+	void Update() {
+		UpdateScoreAddition ();
+	}
+
+	void UpdateScoreAddition() {
+		if (scoreFadeTimer.x > 0.01f) {
+			scoreFadeColour.a = Mathf.Lerp (0, 1, scoreFadeTimer.x / scoreFadeTime);
+			scoreAddL.color = scoreFadeColour;
+
+			scoreFadeTimer.x -= Time.deltaTime;
+		} else {
+			if (scoreFadeTimer.x != 0) {
+				scoreFadeTimer.x = 0;
+				scoreFadeColour.a = Mathf.Lerp (0, 1, scoreFadeTimer.x / scoreFadeTime);
+				scoreAddL.color = scoreFadeColour;
+			}
+		}
+
+		if (scoreFadeTimer.y > 0.01f) {
+			scoreFadeColour.a = Mathf.Lerp (0, 1, scoreFadeTimer.y / scoreFadeTime);
+			scoreAddR.color = scoreFadeColour;
+
+			scoreFadeTimer.y -= Time.deltaTime;
+		} else {
+			if (scoreFadeTimer.y != 0) {
+				scoreFadeTimer.y = 0;
+				scoreFadeColour.a = Mathf.Lerp (0, 1, scoreFadeTimer.y / scoreFadeTime);
+				scoreAddL.color = scoreFadeColour;
+			}
+		}
+	}
+
 	// Increase value of score upon obtaining points
-	public void AwardPoints(int numOfIngredients) {
+	public void AwardPoints(int numOfIngredients, int side = 0) {
 		if (!gameHasEnded) {
 			scoreValue += scoreBase * numOfIngredients;
 			pizzasServed++;
 			scoreText.text = scoreValue.ToString ();
+
+			if (side > 0) {
+				scoreFadeTimer.y = scoreFadeTime;
+				scoreAddR.text = "+" + (scoreBase * numOfIngredients).ToString ();
+			} else if (side < 0) {
+				scoreFadeTimer.x = scoreFadeTime;
+				scoreAddL.text = "+" + (scoreBase * numOfIngredients).ToString ();
+			}
 		}
 	}
 
