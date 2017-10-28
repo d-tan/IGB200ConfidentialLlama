@@ -141,6 +141,7 @@ PlayerSettings:
   targetPixelDensity: 0
   resolutionScalingMode: 0
   applicationIdentifier:
+    Android: ConfidentialLlama.PizzaFlick
     iOS: com.ConfidentialLlama.PizzaFlick
   buildNumber: {}
   AndroidBundleVersionCode: 1

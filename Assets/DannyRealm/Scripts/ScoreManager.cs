@@ -65,6 +65,18 @@ public class ScoreManager : MonoBehaviour {
 			Debug.Log("Stored file: " + File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json")));
 		#endif
 
+		if (Application.platform == RuntimePlatform.Android) {
+			if (!File.Exists (Path.Combine (Application.persistentDataPath, fileName + ".json"))) {
+				Debug.Log ("Creaing file");
+				File.Create (Path.Combine (Application.persistentDataPath, fileName + ".json")).Dispose ();
+				string content = JsonUtility.ToJson (new ScoreBoardSave ());
+				File.WriteAllText (Path.Combine (Application.persistentDataPath, fileName + ".json"), content);
+			}
+			Debug.Log ("Path exists: " + File.Exists (Path.Combine (Application.persistentDataPath, fileName + ".json")));
+			Debug.Log ("JsonFile: " + JsonUtility.ToJson (new ScoreBoardSave ()));
+			Debug.Log ("Stored file: " + File.ReadAllText (Path.Combine (Application.persistentDataPath, fileName + ".json")));
+		}
+
 		ReadScoreboardFile ();
 		UpdateScoreboard ();
 	}
@@ -167,6 +179,10 @@ public class ScoreManager : MonoBehaviour {
 			file = File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"));
 		#endif
 
+		if (Application.platform == RuntimePlatform.Android) {
+			file = File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"));
+		}
+
 		Debug.Log ("Inside File: " + file);
 
 		// Read from Json
@@ -230,6 +246,11 @@ public class ScoreManager : MonoBehaviour {
 		#else
 			pathDir = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
 		#endif
+
+		if (Application.platform == RuntimePlatform.Android) {
+			pathDir = Path.Combine(Application.persistentDataPath, fileName + ".json");
+		}
+
 		Debug.Log ("Path: " + pathDir);
 
 		if (File.Exists (pathDir)) {
@@ -240,11 +261,15 @@ public class ScoreManager : MonoBehaviour {
 
 	public void ResetScoreboard() {
 		string path = "";
-		#if (PLATFORM_IPHONE)
+		#if (PLATFORM_IPHONE || UNITY_ANDROID)
 		path = Path.Combine(Application.persistentDataPath, fileName + ".json");
 		#else
 		path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
 		#endif
+
+		if (Application.platform == RuntimePlatform.Android) {
+			path = Path.Combine(Application.persistentDataPath, fileName + ".json");
+		}
 
 		if (File.Exists(path)) {
 			string json = JsonUtility.ToJson (new ScoreBoardSave (), true);
