@@ -19880,6 +19880,21 @@ Prefab:
       propertyPath: inputParticlesR
       value: 
       objectReference: {fileID: 1388245419}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: successSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cb2ad868cd161514ab2f8a50c17a65de, type: 3}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: failSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c8f7855589a9ea94abc713d181cc6f5e, type: 3}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 2144268523}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97d1d1aaf1cfb460a82416d705263966, type: 2}
   m_IsPrefabParent: 0
