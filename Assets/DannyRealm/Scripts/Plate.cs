@@ -13,6 +13,10 @@ public enum IngredientID {
 
 public class Plate : MonoBehaviour {
 
+	// Audio setup
+	public AudioSource source;
+	public AudioClip popSound;
+
 //	Collider myCollider;
 	public Throwable throwScript;
 //	float colliderHeight = 0f;
@@ -70,6 +74,10 @@ public class Plate : MonoBehaviour {
 			SpawnTopping (toppingOffset + (toppingSpacing * currentToppingLayer), id);
 			currentToppingLayer++;
 		}
+
+		// Play pop sound
+		source.pitch = Random.Range (0.8f, 1.2f);
+		source.PlayOneShot(popSound, 1.0f);
 	}
 
 	void SpawnTopping(Vector3 relativePos, IngredientID id) {
