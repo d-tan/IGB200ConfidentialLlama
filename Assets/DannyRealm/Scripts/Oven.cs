@@ -16,8 +16,14 @@ public class Oven : MonoBehaviour {
 	ParticleSystem.ForceOverLifetimeModule inputRforce;
 	int inputSide = 0;
 
+	// Audio Setup
+	public AudioSource source;
+	public AudioClip successSound;
+	public AudioClip failSound;
+
 	ScoreManager scoreManager;
     Tutorial tutorial;
+
 
 	// Use this for initialization
 	void Start () {
@@ -74,12 +80,14 @@ public class Oven : MonoBehaviour {
 			Debug.Log("Recipe Right");
 			OrderCompletedActions ();
 			rightOrder.OrderCompleted ();
+			source.PlayOneShot(successSound, 1.0f);
 
         } else if (side < 0) {
 			// Left side
 			Debug.Log ("Recipe Left");
 			OrderCompletedActions ();
 			leftOrder.OrderCompleted ();
+			source.PlayOneShot(successSound, 1.0f);
 
         } else {
 			Debug.Log ("No Match");
@@ -95,6 +103,8 @@ public class Oven : MonoBehaviour {
 				inputParticlesR.time = 0;
 				inputParticlesR.Play ();
 			}
+
+			source.PlayOneShot(failSound, 1.0f);
 		}
 	}
 

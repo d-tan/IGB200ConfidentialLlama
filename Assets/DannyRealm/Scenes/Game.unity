@@ -108,12 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &15961259 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114135412814261382, guid: 11dfbfb3a06914c959aa1211bcdb2ca1,
-    type: 2}
-  m_PrefabInternal: {fileID: 246733340}
-  m_Script: {fileID: 11500000, guid: 8708d5e2f4ff54897b73f137d74f3f74, type: 3}
 --- !u!114 &20324425 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114994981137717576, guid: 5d55ed16f3811438ca7e4c40f938436d,
@@ -17524,12 +17518,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d7782ee2f00347b68418b4a3bf9b41a, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1621591028 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114135412814261382, guid: 11dfbfb3a06914c959aa1211bcdb2ca1,
-    type: 2}
-  m_PrefabInternal: {fileID: 1404358164}
-  m_Script: {fileID: 11500000, guid: 8708d5e2f4ff54897b73f137d74f3f74, type: 3}
 --- !u!1 &1622474047
 GameObject:
   m_ObjectHideFlags: 0
@@ -19864,22 +19852,37 @@ Prefab:
         type: 2}
       propertyPath: rightOrder
       value: 
-      objectReference: {fileID: 15961259}
+      objectReference: {fileID: 0}
     - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
         type: 2}
       propertyPath: leftOrder
       value: 
-      objectReference: {fileID: 1621591028}
+      objectReference: {fileID: 0}
     - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
         type: 2}
       propertyPath: inputParticlesL
       value: 
-      objectReference: {fileID: 105839706}
+      objectReference: {fileID: 0}
     - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
         type: 2}
       propertyPath: inputParticlesR
       value: 
-      objectReference: {fileID: 1388245419}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 2144268523}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: failSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2720d8082cfc77c4d964d0ae8ae386a1, type: 3}
+    - target: {fileID: 114212763080725684, guid: 97d1d1aaf1cfb460a82416d705263966,
+        type: 2}
+      propertyPath: successSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 793ff036246c96a4f92a8b47fafeebeb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97d1d1aaf1cfb460a82416d705263966, type: 2}
   m_IsPrefabParent: 0
