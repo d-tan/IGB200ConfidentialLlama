@@ -5808,6 +5808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   pauseScreen: {fileID: 1816879236}
+  audioCredit: {fileID: 0}
   controls: {fileID: 512653436}
 --- !u!114 &512653443
 MonoBehaviour:
