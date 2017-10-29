@@ -16551,6 +16551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1407212711}
   gametime: 180
+  source: {fileID: 2144268523}
+  mamaMia: {fileID: 8300000, guid: 1a7d814329e171d4491b42bdf7ba93bb, type: 3}
   endScreen: {fileID: 809386093}
 --- !u!114 &1407212711
 MonoBehaviour:

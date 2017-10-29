@@ -10,6 +10,10 @@ public class TimerScript : MonoBehaviour {
 	string minutes;
 	string seconds;
 
+	// Audio Setup
+	public AudioSource source;
+	public AudioClip mamaMia;
+
 	public GameObject endScreen;
 	GameManager gameManager;
 
@@ -45,6 +49,7 @@ public class TimerScript : MonoBehaviour {
 			if (!endScreen.activeSelf) {
 				endScreen.SetActive (true);
 				gameManager.GameEnded ();
+				source.PlayOneShot(mamaMia, 1.0f);
 			}
 		}
 	}
