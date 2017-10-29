@@ -7,6 +7,7 @@ using System.IO;
 public class PauseResume : MonoBehaviour {
 
 	public bool paused = false;
+	public GameObject pauseScreen;
 	public TouchControls controls;
 
 	// Use this for initialization
@@ -26,10 +27,12 @@ public class PauseResume : MonoBehaviour {
 			Time.timeScale = 0.0f;
 			controls.enabled = false;
 			paused = true;
+			pauseScreen.SetActive(true);
 		} else if (paused == true) {
 			Time.timeScale = 1.0f;
 			controls.enabled = true;
 			paused = false;
+			pauseScreen.SetActive(false);
 		}
 	}
 
