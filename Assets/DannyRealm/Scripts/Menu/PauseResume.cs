@@ -8,6 +8,7 @@ public class PauseResume : MonoBehaviour {
 
 	public bool paused = false;
 	public GameObject pauseScreen;
+	public GameObject audioCredit;
 	public TouchControls controls;
 
 	// Use this for initialization
@@ -39,6 +40,14 @@ public class PauseResume : MonoBehaviour {
 	public void PlayTutorial() {
 		PlayerPrefs.SetInt ("StartWithTutorial", 1);
 		ChangeToTutorial ();
+	}
+
+	public void ShowCredit() {
+		audioCredit.SetActive(true);
+	}
+
+	public void HideCredit() {
+		audioCredit.SetActive(false);
 	}
 
 	public void ChangeToTutorial() {
