@@ -72,6 +72,7 @@ public class ScoreManager : MonoBehaviour {
 				string content = JsonUtility.ToJson (new ScoreBoardSave ());
 				File.WriteAllText (Path.Combine (Application.persistentDataPath, fileName + ".json"), content);
 			}
+
 			Debug.Log ("Path exists: " + File.Exists (Path.Combine (Application.persistentDataPath, fileName + ".json")));
 			Debug.Log ("JsonFile: " + JsonUtility.ToJson (new ScoreBoardSave ()));
 			Debug.Log ("Stored file: " + File.ReadAllText (Path.Combine (Application.persistentDataPath, fileName + ".json")));
@@ -173,7 +174,7 @@ public class ScoreManager : MonoBehaviour {
 
 	void ReadScoreboardFile() {
 		Debug.Log ("Reading scoreboard file...");
-		string file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
+		string file = "";
 
 		#if (PLATFORM_IPHONE)
 			file = File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"));
@@ -181,10 +182,11 @@ public class ScoreManager : MonoBehaviour {
 
 		if (Application.platform == RuntimePlatform.Android) {
 			file = File.ReadAllText(Path.Combine(Application.persistentDataPath, fileName + ".json"));
+		} else if (Application.platform == RuntimePlatform.WindowsPlayer) {
+			file = File.ReadAllText (Path.Combine(Application.streamingAssetsPath, fileName + ".json"));
 		}
 
 		Debug.Log ("Inside File: " + file);
-
 		// Read from Json
 		saveClass = JsonUtility.FromJson<ScoreBoardSave> (file);
 
